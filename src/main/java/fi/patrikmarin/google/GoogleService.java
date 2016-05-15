@@ -77,10 +77,14 @@ public class GoogleService {
 
     public static void main(String[] args) throws IOException {
     	CalendarService cs = new CalendarService();
+    	TasksService ts = new TasksService();
     	
-    	for (GCalendar gc : cs.calendars) {
-    		System.out.println(gc.getName());
-    		System.out.println(gc.getColor());
+    	for (GCalendarEvent ge : cs.events) {
+    		System.out.println(ge.getSummary() + " - " + ge.getStart());
+    	}
+    	
+    	for (GTaskEvent ge : ts.tasks) {
+    		if (!ge.getCompleted()) System.out.println(ge.getTitle() + " - " + ge.getNotes());
     	}
     }
 

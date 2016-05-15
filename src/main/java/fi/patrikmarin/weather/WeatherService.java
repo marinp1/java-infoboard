@@ -24,7 +24,7 @@ public class WeatherService {
 	public static String FILE_LOCATION = FOLDER_LOCATION + File.separator + FILE_NAME;
 	
 	String API_KEY = Keys.FMI_API_KEY;
-	String LOCATION = "Kivenlahti,Espoo";
+	String LOCATION = "Otaniemi,Espoo";
 	
 	String SERVER_URL = "http://data.fmi.fi/fmi-apikey/" + API_KEY + "/wfs";
 	String QUERY_ID = "fmi::forecast::hirlam::surface::point::simple";
