@@ -65,6 +65,7 @@ public class GetFMIIcons {
 		fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 		fos.flush();
 		fos.close();
+		rbc.close();
 		
 		System.out.println("Saved file images/" + dayNight + "_" + code + EXT);
 	}
