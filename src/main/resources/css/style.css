@@ -1,0 +1,16 @@
+#pane{
+    -fx-background-image: url("../images/bg.jpg");
+    -fx-background-position: top bottom;
+    -fx-background-size: cover;
+}
+
+.text {
+	-fx-font-smoothing-type: gray;
+	-fx-text-fill: #FFFFFF;
+	-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 30,0.2,0,0);
+}
+
+.separator {
+	-fx-background-color: #FFFFFF;
+	-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 30,0.2,0,0);
+}
