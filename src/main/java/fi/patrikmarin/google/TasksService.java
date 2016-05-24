@@ -10,19 +10,24 @@ import com.google.api.services.tasks.model.Task;
 import com.google.api.services.tasks.model.TaskList;
 import com.google.api.services.tasks.model.TaskLists;
 
+import fi.patrikmarin.data.SettingsService;
 import fi.patrikmarin.google.GoogleService;
 
 public class TasksService {
 	
-	public ArrayList<GTaskList> tasklists = new ArrayList<GTaskList>();
-	public ArrayList<GTaskEvent> tasks = new ArrayList<GTaskEvent>();
+	public static ArrayList<GTaskList> tasklists = new ArrayList<GTaskList>();
+	public static ArrayList<GTaskEvent> tasks = new ArrayList<GTaskEvent>();
 	
     private Tasks service;
 	
-	public TasksService() throws IOException {
-		service = getTasksService();
-		getTaskLists();
-		getTasks();
+	public TasksService() {
+		try {
+			service = getTasksService();
+			update();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 	
     /**
@@ -58,6 +63,10 @@ public class TasksService {
             	tl.setLink(tasklist.getSelfLink());
             	tl.setTitle(tasklist.getTitle());
             	
+		    	if (SettingsService.taskSettings.containsKey(tasklist.getId())) {
+		    		tl.setEnabled(SettingsService.taskSettings.get(tasklist.getId()));
+		    	}
+            	
             	tasklists.add(tl);
             }
         }
@@ -80,6 +89,15 @@ public class TasksService {
         	  tasks.add(gtask);
         	}
         	
+    	}
+    }
+    
+    public void update() {
+    	try {
+			getTaskLists();
+			getTasks();
+    	} catch (Exception e) {
+    		e.printStackTrace();
     	}
     }
 }

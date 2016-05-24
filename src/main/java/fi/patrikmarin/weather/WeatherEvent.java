@@ -29,8 +29,8 @@ public class WeatherEvent {
 	
 	protected void setSymbol(Integer s) {
 		symbol = s;
-		LocalDate sunrise = DateParser.parseDate(Infoboard.ws.getSunrise());
-		LocalDate sunset = DateParser.parseDate(Infoboard.ws.getSunset());
+		LocalDate sunrise = DateParser.parseDate(WeatherService.getSunrise());
+		LocalDate sunset = DateParser.parseDate(WeatherService.getSunset());
 		LocalDate now = LocalDate.now();
 		
 		if (sunrise.isAfter(now) || sunset.isBefore(now)) {

@@ -6,6 +6,7 @@ public class GCalendar {
 	private Color color;
 	private String name;
 	private String ID;
+	private Boolean enabled;
 	
 	public void setColor(Color c) {
 		color = c;
@@ -17,6 +18,10 @@ public class GCalendar {
 	
 	public void setID(String s) {
 		ID = s;
+	}
+	
+	public void setEnabled(Boolean b) {
+		enabled = b;
 	}
 	
 	public Color getColor() {
@@ -31,13 +36,18 @@ public class GCalendar {
 		return ID;
 	}
 	
+	public Boolean getEnabled() {
+		return enabled;
+	}
+	
 	public GCalendar() {
-		
+		this.enabled = true;
 	}
 	
 	public GCalendar(String id, String name, Color col) {
 		setID(id);
 		setName(name);
 		setColor(col);
+		this.enabled = true;
 	}
 }

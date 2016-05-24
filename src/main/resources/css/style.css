@@ -4,13 +4,60 @@
     -fx-background-size: cover;
 }
 
-.text {
+.timedatetext {
 	-fx-font-smoothing-type: gray;
-	-fx-text-fill: #FFFFFF;
-	-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 30,0.2,0,0);
+	-fx-text-fill: #FFF;
+	-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.5) , 30,0.2,0,10);
+}
+
+.calendarEventMainText {
+	-fx-font-smoothing-type: gray;
+	-fx-text-fill: #000;
+}
+
+.calendarEventMainTime {
+	-fx-font-smoothing-type: gray;
+	-fx-text-fill: #444;
+}
+
+.calendarEventSecondaryText {
+	-fx-font-smoothing-type: gray;
+	-fx-text-fill: #666;
+}
+
+.calendarRectangleText {
+	-fx-font-smoothing-type: gray;
+	-fx-text-fill: #FFF;
 }
 
 .separator {
 	-fx-background-color: #FFFFFF;
 	-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 30,0.2,0,0);
+}
+
+.settingElement {
+	-fx-background-color: rgba(255,255,255, 1);
+	-fx-fill: rgba(255,255,255, 1);
+}
+
+.calendarElement {
+	-fx-background-color: rgba(255,255,255, 0.7);
+	-fx-fill: rgba(255,255,255, 0.7);
+	-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.5) , 30,0.2,0,10);
+	-fx-border-radius: 0 0 5 5;
+	-fx-background-radius: 0 0 5 5;
+}
+
+.calendarDayElement {
+	-fx-background-color: rgba(255,255,255, 0.7);
+	-fx-fill: rgba(255,255,255, 0.7);
+	-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.5) , 30,0.2,0,10);
+	-fx-border-radius: 5 5 0 0;
+	-fx-background-radius: 5 5 0 0;
+}
+
+.calendarIcon {
+	-fx-arc-width: 5;
+	-fx-arc-height: 5;
+	-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.3) , 3,0.1,0,0);
 }

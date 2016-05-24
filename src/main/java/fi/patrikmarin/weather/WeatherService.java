@@ -31,15 +31,15 @@ public class WeatherService {
 	
 	String FETCH_URL = SERVER_URL + "?request=getFeature&storedquery_id=" + QUERY_ID + "&place=" + LOCATION;
 
-	Double LAT = 60.18395;
-	Double LNG = 24.82786;
+	static Double LAT = 60.18395;
+	static Double LNG = 24.82786;
 	
 	public ArrayList<WeatherEvent> weatherElements = null;
 	Double minTemp = null;
 	Double maxTemp = null;
 	
-	String sunrise = null;
-	String sunset = null;
+	static String sunrise = null;
+	static String sunset = null;
 	
 	public LocalDateTime lastUpdated = LocalDateTime.now();
 	
@@ -102,15 +102,15 @@ public class WeatherService {
 		return maxTemp;
 	}
 	
-	public String getSunrise() {
+	public static String getSunrise() {
 		return sunrise;
 	}
 	
-	public String getSunset() {
+	public static String getSunset() {
 		return sunset;
 	}
 	
-	private void getSunRiseSet() {
+	private static void getSunRiseSet() {
 		SolarCalculator sc = new SolarCalculator();
 		sunrise = sc.calculate(LAT, LNG, true);
 		sunset = sc.calculate(LAT, LNG, false);

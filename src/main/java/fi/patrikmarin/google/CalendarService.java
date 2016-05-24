@@ -17,6 +17,7 @@ import com.google.api.services.calendar.model.Colors;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
 
+import fi.patrikmarin.data.SettingsService;
 import fi.patrikmarin.google.GoogleService;
 
 public class CalendarService {
@@ -24,16 +25,18 @@ public class CalendarService {
 	private HashMap<String, Color> calendarColorKeys = new HashMap<String, Color>();
 	private HashMap<String, Color> eventColorKeys = new HashMap<String, Color>();
 	
-	public ArrayList<GCalendar> calendars = new ArrayList<GCalendar>();
-	public ArrayList<GCalendarEvent> events = new ArrayList<GCalendarEvent>();
+	public static ArrayList<GCalendar> calendars = new ArrayList<GCalendar>();
+	public static ArrayList<GCalendarEvent> events = new ArrayList<GCalendarEvent>();
 	
 	private com.google.api.services.calendar.Calendar service;
 	
-	public CalendarService() throws IOException {
-		service = getCalendarService();
-		getColors();
-		getCalendars();
-		getEvents();
+	public CalendarService() {
+		try {
+			service = getCalendarService();
+			update();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
     /**
@@ -84,6 +87,7 @@ public class CalendarService {
     		List<CalendarListEntry> items = calendarList.getItems();
     		
     			for (CalendarListEntry calendarListEntry : items) {
+    				
     				GCalendar gcal = new GCalendar();
     				
     				if (calendarListEntry.getSummaryOverride() == null) {
@@ -94,6 +98,10 @@ public class CalendarService {
     				
     				gcal.setColor(calendarColorKeys.get(calendarListEntry.getColorId()));
     				gcal.setID(calendarListEntry.getId());
+    				
+    		    	if (SettingsService.calendarSettings.containsKey(calendarListEntry.getId())) {
+    		    		gcal.setEnabled(SettingsService.calendarSettings.get(calendarListEntry.getId()));
+    		    	}
     				
     				calendars.add(gcal);
             	  }
@@ -147,5 +155,16 @@ public class CalendarService {
         }
         
         Collections.sort(events);
+    }
+    
+    public void update() {
+    	try {
+    		getColors();
+    		getCalendars();
+    		getEvents();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+
     }
 }

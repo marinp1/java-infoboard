@@ -1,6 +1,7 @@
 package fi.patrikmarin.infoboard;
 
 
+import java.io.FileInputStream;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -47,6 +48,7 @@ public class Infoboard extends Application {
 	
 	@Override
 	public void start(Stage mainStage) {
+		Font.loadFont(getClass().getResourceAsStream("/fonts/Roboto-Bold.ttf"), 10);
 		
         mainStage.setTitle("Infoboard v." + versionNumber);
         mainStage.setMinHeight(800);

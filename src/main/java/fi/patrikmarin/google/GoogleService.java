@@ -61,7 +61,7 @@ public class GoogleService {
      * @return an authorized Credential object.
      * @throws IOException
      */
-    public static Credential authorize() throws IOException {        
+    protected static Credential authorize() throws IOException {        
         GoogleAuthorizationCodeFlow flow =
                 new GoogleAuthorizationCodeFlow.Builder(
                 		HTTP_TRANSPORT, JSON_FACTORY, Keys.GOOGLE_CLIENT_ID, Keys.GOOGLE_CLIENT_SECRET, SCOPES)
@@ -73,19 +73,6 @@ public class GoogleService {
         System.out.println(
                 "Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
         return credential;
-    }
-
-    public static void main(String[] args) throws IOException {
-    	CalendarService cs = new CalendarService();
-    	TasksService ts = new TasksService();
-    	
-    	for (GCalendarEvent ge : cs.events) {
-    		System.out.println(ge.getSummary() + " - " + ge.getStart());
-    	}
-    	
-    	for (GTaskEvent ge : ts.tasks) {
-    		if (!ge.getCompleted()) System.out.println(ge.getTitle() + " - " + ge.getNotes());
-    	}
     }
 
 }

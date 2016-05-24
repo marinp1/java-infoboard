@@ -3,14 +3,14 @@ package fi.patrikmarin.google;
 import com.google.api.client.util.DateTime;
 
 
-public class GTaskEvent {
+public class GTaskEvent extends GEvent  {
 	private String ID;
 	private String title;
 	private String notes;
 	private DateTime due;
 	private Boolean completed;
 	private GTaskList parent;
-	
+
 	public String getID() {
 		return ID;
 	}
@@ -49,6 +49,7 @@ public class GTaskEvent {
 	
 	public void setDue(DateTime due) {
 		this.due = due;
+		compareBy = due;
 	}
 	
 	public void setCompleted(Boolean completed) {

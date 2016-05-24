@@ -6,7 +6,7 @@ import com.google.api.client.util.DateTime;
 
 import javafx.scene.paint.Color;
 
-public class GCalendarEvent implements Comparable<GCalendarEvent> {
+public class GCalendarEvent extends GEvent {
 	private GCalendar parent;
 	private String ID;
 	private String summary;
@@ -74,14 +74,10 @@ public class GCalendarEvent implements Comparable<GCalendarEvent> {
 	
 	public void setStart(DateTime start) {
 		this.start = start;
+		this.compareBy = start;
 	}
 	
 	public void setEnd(DateTime end) {
 		this.end = end;
-	}
-
-	@Override
-	public int compareTo(GCalendarEvent ev) {
-		return Long.compare(this.start.getValue(), ev.start.getValue());
 	}
 }

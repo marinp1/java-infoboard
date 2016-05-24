@@ -4,6 +4,7 @@ public class GTaskList {
 	private String ID;
 	private String title;
 	private String link;
+	private Boolean enabled;
 	
 	public String getID() {
 		return ID;
@@ -17,6 +18,10 @@ public class GTaskList {
 		return link;
 	}
 	
+	public Boolean getEnabled() {
+		return enabled;
+	}
+	
 	public void setID(String iD) {
 		ID = iD;
 	}
@@ -27,5 +32,13 @@ public class GTaskList {
 	
 	public void setLink(String link) {
 		this.link = link;
+	}
+	
+	public void setEnabled(Boolean b) {
+		enabled = b;
+	}
+	
+	public GTaskList() {
+		enabled = true;
 	}
 }
