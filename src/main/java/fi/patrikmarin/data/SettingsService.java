@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import com.google.gson.Gson;
@@ -27,9 +28,20 @@ public class SettingsService {
 	private static String SETTINGS_CAL_NAME = "calendars";
 	private static String SETTINGS_TL_NAME = "tasklists";
 	
-	public SettingsService() {
+	static {
 		if (!SETTINGS_STORE.exists()) {
-			SETTINGS_STORE.mkdirs();
+			try {
+				if (!SETTINGS_STORE.getParentFile().exists()) {
+					SETTINGS_STORE.getParentFile().mkdirs();
+				}
+				
+				PrintWriter writer = new PrintWriter(SETTINGS_STORE, "UTF-8");
+				writer.println("{");
+				writer.println("}");
+				writer.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
