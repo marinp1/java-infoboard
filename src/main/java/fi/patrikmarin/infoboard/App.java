@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
@@ -40,6 +41,7 @@ public class App extends Application {
     
     /**
      * Constructor for the main application.
+     * TODO: Replace dummy data with service classes
      */
     public App() {
     	sunrise = SolarCalculator.calculate(60.1234, 23.2322, SolarCalculatorResult.SUNRISE, null);
@@ -55,7 +57,7 @@ public class App extends Application {
     	
     	eventData.put(LocalDate.now(), eventList);
     }
-    
+
     /**
      * Updates application data with service classes.
      * TODO: Service classes
@@ -85,7 +87,7 @@ public class App extends Application {
      * The start method for the program.
      */
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) {    	
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Infoboard 2.0");
 
@@ -96,6 +98,7 @@ public class App extends Application {
                 	try {
                     	th.interrupt();
                     	th.join();
+                    	//FIXME: Create settings service
                 		//SettingsService.saveSettings();
                     	System.out.println("Exit successful.");
                 	} catch (Exception e) {
@@ -147,7 +150,7 @@ public class App extends Application {
                         public void run() {
                         	System.out.println("Updating... " + SECONDS_SINCE_LAST_UPDATE);
                         	
-                        	// Ever 5 minutes update data content and do a hard update on the view
+                        	// Every 5 minutes update data content and do a hard update on the view
                         	if (SECONDS_SINCE_LAST_UPDATE > DATA_UPDATE_INTERVAL) {
                         		updateData();
                         		SECONDS_SINCE_LAST_UPDATE = 0;

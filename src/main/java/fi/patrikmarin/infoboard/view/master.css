@@ -1,11 +1,11 @@
 @font-face {
     font-family: "Weather Icons";
-    src: url('/fonts/weathericons.ttf');
+    src: url("/fonts/weathericons.ttf");
 }
 
 @font-face {
     font-family: "Roboto Thin";
-    src: url('/fonts/Roboto-Thin.ttf');
+    src: url("/fonts/Roboto-Thin.ttf");
 }
 
 .background-img {
