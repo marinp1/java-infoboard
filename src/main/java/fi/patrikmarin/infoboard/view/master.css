@@ -1,0 +1,79 @@
+@font-face {
+    font-family: "Weather Icons";
+    src: url('/fonts/weathericons.ttf');
+}
+
+@font-face {
+    font-family: "Roboto Thin";
+    src: url('/fonts/Roboto-Thin.ttf');
+}
+
+.background-img {
+	-fx-background-image: url('/images/3.jpg');
+	-fx-background-position: center center;
+	-fx-background-size: cover;
+}
+
+.body {
+	-fx-background-color: rgba(0,0,0,0.45);
+	-fx-font-family: "Roboto Thin";
+	-fx-font-smoothing-type: gray;	
+}
+
+.main-color {
+	-fx-text-fill: #fff;
+	-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.3, 0, 2);		
+}
+
+.secondary-color {
+	-fx-text-fill: rgba(255,255,255,0.65);
+	-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.3, 0, 2);	
+}
+
+.datetime-main {
+	-fx-font-size: 140px;
+}
+
+.datetime-secondary {
+	-fx-font-size: 48px;
+}
+
+.infoblock {
+	-fx-font-size: 36px;
+}
+
+.infoblock-icon {
+	-fx-padding: 0 0 0 20px;
+	-fx-font-family: "Weather Icons";
+}
+
+.infoblock-secondary {
+	-fx-padding: 0 20px 0 0;
+}
+
+.datablock-key {
+	-fx-font-family: "Weather Icons";
+	-fx-padding: 0 20px 0 0;
+	-fx-text-align: center;
+	-fx-width: 1.4em;	
+}
+
+.datablock-value {
+	
+}
+
+.googleblock {
+	-fx-font-size: 36px;
+}
+
+.googleblock-main {
+	-fx-font-size: 36px;
+}
+
+.googleblock-info {
+	-fx-font-size: 30px;
+}
+
+.googleblock-time {
+	-fx-padding: 0 20px 0 0;
+}

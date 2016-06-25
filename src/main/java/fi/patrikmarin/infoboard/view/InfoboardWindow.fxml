@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.net.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<StackPane styleClass="background-img" stylesheets="@master.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.patrikmarin.infoboard.view.InfoboardController">
+   <children>
+      <AnchorPane minHeight="800.0" minWidth="600.0" styleClass="body">
+         <children>
+            <HBox alignment="TOP_CENTER" layoutX="60.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" layoutX="60.0" layoutY="14.0" prefWidth="800.0" spacing="70.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="0.0" HBox.hgrow="NEVER">
+                     <children>
+                        <GridPane fx:id="dateTimeBlock" alignment="TOP_CENTER" hgap="60.0" vgap="25.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label fx:id="datetimeBlockTime" text="15:22" GridPane.halignment="LEFT" GridPane.rowSpan="2">
+                                 <styleClass>
+                                    <String fx:value="main-color" />
+                                    <String fx:value="datetime-main" />
+                                 </styleClass>
+                              </Label>
+                              <Label fx:id="datetimeBlockDate" text="pe 24.6.2016" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <styleClass>
+                                    <String fx:value="secondary-color" />
+                                    <String fx:value="datetime-secondary" />
+                                 </styleClass>
+                              </Label>
+                              <Label fx:id="datetimeBlockWeek" text="week 26" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <styleClass>
+                                    <String fx:value="secondary-color" />
+                                    <String fx:value="datetime-secondary" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" />
+                           </padding>
+                        </GridPane>
+                        <HBox spacing="30.0" styleClass="infoblock">
+                           <children>
+                              <VBox HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label alignment="TOP_LEFT" styleClass="secondary-color" text="Weather forecast" />
+                                    <VBox fx:id="weatherBox" prefWidth="100.0" />
+                                 </children>
+                              </VBox>
+                              <VBox fillWidth="false" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <GridPane alignment="TOP_CENTER" hgap="10.0" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER">
+                                      <columnConstraints>
+                                        <ColumnConstraints halignment="CENTER" hgrow="NEVER" minWidth="10.0" />
+                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" />
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label styleClass="secondary-color" text="Additional data" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.valignment="BASELINE" />
+                                          <Label text="" GridPane.rowIndex="1">
+                                             <styleClass>
+                                                <String fx:value="datablock-key" />
+                                                <String fx:value="secondary-color" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label fx:id="sunriseLabel" styleClass="main-color" text="23:59" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label text="" GridPane.rowIndex="3">
+                                             <styleClass>
+                                                <String fx:value="datablock-key" />
+                                                <String fx:value="wi-fw" />
+                                                <String fx:value="secondary-color" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label fx:id="sunsetLabel" styleClass="main-color" text="23:59" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <Label text="" GridPane.rowIndex="2">
+                                             <styleClass>
+                                                <String fx:value="datablock-key" />
+                                                <String fx:value="secondary-color" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label fx:id="innerTemperatureLabel" styleClass="main-color" text="N/A" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <VBox fx:id="googleBox" prefWidth="100.0" styleClass="googleblock">
+                           <children>
+                              <VBox prefWidth="100.0" spacing="10.0">
+                                 <children>
+                                    <Label styleClass="secondary-color" text="Today" />
+                                    <GridPane vgap="15.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="NEVER" minWidth="10.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="18:00" GridPane.hgrow="NEVER">
+                                             <styleClass>
+                                                <String fx:value="googleblock-main" />
+                                                <String fx:value="googleblock-time" />
+                                                <String fx:value="main-color" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label text="2h- Espoonlahden TN 2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                             <styleClass>
+                                                <String fx:value="secondary-color" />
+                                                <String fx:value="googleblock-info" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label text="EPS Rock Reenit 21-22" GridPane.columnIndex="1">
+                                             <styleClass>
+                                                <String fx:value="googleblock-main" />
+                                                <String fx:value="main-color" />
+                                             </styleClass>
+                                          </Label>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="120.0" />
+                     </padding>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
