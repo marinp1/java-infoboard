@@ -1,4 +1,4 @@
-package fi.patrikmarin.infoboard.modal;
+package fi.patrikmarin.infoboard.google;
 
 import java.time.LocalDateTime;
 

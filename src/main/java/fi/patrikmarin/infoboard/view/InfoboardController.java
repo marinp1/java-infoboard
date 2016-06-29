@@ -1,12 +1,13 @@
 package fi.patrikmarin.infoboard.view;
 
+import static fi.patrikmarin.infoboard.utils.Utils.*;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import fi.patrikmarin.infoboard.App;
-import static fi.patrikmarin.infoboard.Utils.*;
-import fi.patrikmarin.infoboard.modal.GoogleEvent;
-import fi.patrikmarin.infoboard.modal.WeatherEvent;
+import fi.patrikmarin.infoboard.google.GoogleEvent;
+import fi.patrikmarin.infoboard.weather.WeatherEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;

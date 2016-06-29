@@ -1,4 +1,4 @@
-package fi.patrikmarin.infoboard;
+package fi.patrikmarin.infoboard.utils;
 
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -11,10 +11,12 @@ public class Utils {
 	//==================== DATETIMEFORMATTERS ================================================
 	public static DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
 	public static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("E dd.MM.yyyy");
+	public static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+	public static DateTimeFormatter fmiDateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
 	public static DateTimeFormatter weekFormat = DateTimeFormatter.ofPattern("'week' w");
 	
 	//==================== WEATHER MAPPER ====================================================
-	public static HashMap<String, String> weatherMap = new HashMap<String, String>(); 
+	private static HashMap<String, String> weatherMap = new HashMap<String, String>(); 
 	
 	/**
 	 * Fill the weather map with correct values.
@@ -91,5 +93,39 @@ public class Utils {
 		weatherMap.put("humidity", "\uf07a");
 		weatherMap.put("wind", "\uf050");
 		
+	}
+	
+	/**
+	 * Gives correct iconID content from the map.
+	 * @param weatherIcon the weatherIconID from API
+	 * @param night if the icon should be night specific
+	 * @return the correct content for the ID
+	 */
+	public static String mapWeatherIDToContent(Double weatherIcon, Boolean night) {
+		String weatherKey = String.valueOf(weatherIcon.intValue()) + "_1";
+		
+		if (night) {
+			weatherKey = String.valueOf(weatherIcon.intValue()) + "_2";
+		}
+		
+		return weatherMap.get(weatherKey);
+	}
+	
+	// CUSTOM EXCEPTIONS
+
+	/**
+	 * Custom exception for situations where no elements were
+	 * found for whatever reason.
+	 */
+	public static class NoElementsFoundException extends Exception {
+
+		public NoElementsFoundException() {
+
+		}
+		
+		public NoElementsFoundException(String message)
+		{
+			super(message);
+		}
 	}
 }

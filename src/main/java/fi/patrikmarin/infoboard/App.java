@@ -6,11 +6,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import fi.patrikmarin.infoboard.modal.GoogleEvent;
-import fi.patrikmarin.infoboard.modal.WeatherEvent;
+import fi.patrikmarin.infoboard.google.GoogleEvent;
+import fi.patrikmarin.infoboard.utils.LogLevel;
+import fi.patrikmarin.infoboard.utils.Logger;
 import fi.patrikmarin.infoboard.view.InfoboardController;
 import fi.patrikmarin.infoboard.weather.SolarCalculator;
 import fi.patrikmarin.infoboard.weather.SolarCalculatorResult;
+import fi.patrikmarin.infoboard.weather.WeatherEvent;
+import fi.patrikmarin.infoboard.weather.WeatherService;
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
@@ -44,18 +47,17 @@ public class App extends Application {
      * TODO: Replace dummy data with service classes
      */
     public App() {
-    	sunrise = SolarCalculator.calculate(60.1234, 23.2322, SolarCalculatorResult.SUNRISE, null);
-    	sunset = SolarCalculator.calculate(60.1234, 23.2322, SolarCalculatorResult.SUNSET, null);
+    	updateData();
     	
         // Add some sample data
-    	weatherData.add(new WeatherEvent(LocalDateTime.now(), -10, 1));
-    	weatherData.add(new WeatherEvent(LocalDateTime.now(), 15, 2));
-    	
-    	ArrayList<GoogleEvent> eventList = new ArrayList<GoogleEvent>();
-    	eventList.add(new GoogleEvent("ID", "summary", "paikka", "kuvaus", Color.BLACK, LocalDateTime.now(), LocalDateTime.now().plusHours(2)));
-    	eventList.add(new GoogleEvent("ID", "summary", "paikka", "kuvaus", Color.BLACK, LocalDateTime.now(), LocalDateTime.now().plusHours(2)));
-    	
-    	eventData.put(LocalDate.now(), eventList);
+//    	weatherData.add(new WeatherEvent(LocalDateTime.now(), -10, 1));
+//    	weatherData.add(new WeatherEvent(LocalDateTime.now(), 15, 2));
+//    	
+//    	ArrayList<GoogleEvent> eventList = new ArrayList<GoogleEvent>();
+//    	eventList.add(new GoogleEvent("ID", "summary", "paikka", "kuvaus", Color.BLACK, LocalDateTime.now(), LocalDateTime.now().plusHours(2)));
+//    	eventList.add(new GoogleEvent("ID", "summary", "paikka", "kuvaus", Color.BLACK, LocalDateTime.now(), LocalDateTime.now().plusHours(2)));
+//    	
+//    	eventData.put(LocalDate.now(), eventList);
     }
 
     /**
@@ -63,8 +65,9 @@ public class App extends Application {
      * TODO: Service classes
      */
     private void updateData() {
-    	sunrise = SolarCalculator.calculate(60.1234, 23.2322, SolarCalculatorResult.SUNRISE, null);
-    	sunset = SolarCalculator.calculate(60.1234, 23.2322, SolarCalculatorResult.SUNSET, null);
+    	sunrise = WeatherService.getSunriseSet(SolarCalculatorResult.SUNRISE);
+    	sunset = WeatherService.getSunriseSet(SolarCalculatorResult.SUNSET);
+    	weatherData = WeatherService.getWeatherForecast();
     }
 
     /**
@@ -100,9 +103,9 @@ public class App extends Application {
                     	th.join();
                     	//FIXME: Create settings service
                 		//SettingsService.saveSettings();
-                    	System.out.println("Exit successful.");
+                    	Logger.log(LogLevel.SUCCESS, "Program closed.");
                 	} catch (Exception e) {
-                		System.out.println("Couldn't close update thread.");
+                		Logger.log(LogLevel.ERROR, "Couldn't close update thread.");
                 		e.printStackTrace();
                 	}
                 }
@@ -148,8 +151,6 @@ public class App extends Application {
                     javafx.application.Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                        	System.out.println("Updating... " + SECONDS_SINCE_LAST_UPDATE);
-                        	
                         	// Every 5 minutes update data content and do a hard update on the view
                         	if (SECONDS_SINCE_LAST_UPDATE > DATA_UPDATE_INTERVAL) {
                         		updateData();

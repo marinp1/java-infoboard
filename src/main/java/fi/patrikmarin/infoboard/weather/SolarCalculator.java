@@ -17,7 +17,7 @@ public class SolarCalculator {
 	private static DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("ddMMyyyy HH:mm");
 	private static DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("ddMMyyyy");
 
-	public static LocalDateTime calculate(Double lat, Double lng, SolarCalculatorResult resultType, LocalDate altDate) {
+	protected static LocalDateTime calculate(Double lat, Double lng, SolarCalculatorResult resultType, LocalDate altDate) {
 		Double JD;
 		LocalDateTime dt = LocalDateTime.now();
 
@@ -155,7 +155,7 @@ public class SolarCalculator {
 		return DST != 0;
 	}
 
-	static Double calcDoyFromJD(Double jd) {
+	private static Double calcDoyFromJD(Double jd) {
 		Double z = Math.floor(jd + 0.5);
 		Double f = (jd + 0.5) - z;
 		Double A;
@@ -179,12 +179,12 @@ public class SolarCalculator {
 	}
 
 
-	static Double calcEccentricityEarthOrbit(Double t) {
+	private static Double calcEccentricityEarthOrbit(Double t) {
 		Double e = 0.016708634 - t * (0.000042037 + 0.0000001267 * t);
 		return e;		// unitless
 	}
 
-	static Double calcEquationOfTime(Double t) {
+	private static Double calcEquationOfTime(Double t) {
 		Double epsilon = calcObliquityCorrection(t);
 		Double l0 = calcGeomMeanLongSun(t);
 		Double e = calcEccentricityEarthOrbit(t);
@@ -203,12 +203,12 @@ public class SolarCalculator {
 		return radToDeg(Etime)*4.0;	// in minutes of time
 	}
 
-	static Double calcGeomMeanAnomalySun(Double t) {
+	private static Double calcGeomMeanAnomalySun(Double t) {
 		Double M = 357.52911 + t * (35999.05029 - 0.0001537 * t);
 		return M;		// in degrees
 	}
 
-	static Double calcGeomMeanLongSun(Double t) {
+	private static Double calcGeomMeanLongSun(Double t) {
 		Double L0 = 280.46646 + t * (36000.76983 + t*(0.0003032));
 
 		while(L0 > 360.0) {
@@ -220,7 +220,7 @@ public class SolarCalculator {
 		return L0;	// in degrees
 	}
 
-	static Double calcHourAngleSunrise(Double lat, Double solarDec) {
+	private static Double calcHourAngleSunrise(Double lat, Double solarDec) {
 		Double latRad = degToRad(lat);
 		Double sdRad  = degToRad(solarDec);
 		Double HAarg = (Math.cos(degToRad(90.833))/(Math.cos(latRad)*Math.cos(sdRad))-Math.tan(latRad) * Math.tan(sdRad));
@@ -228,7 +228,7 @@ public class SolarCalculator {
 		return HA;		// in radians (for sunset, use -HA)
 	}
 
-	static Double calcJDofNextPrevRiseSet(Boolean next, Boolean rise, Double JD, Double latitude, Double longitude, Double tz, Boolean dst) {
+	private static Double calcJDofNextPrevRiseSet(Boolean next, Boolean rise, Double JD, Double latitude, Double longitude, Double tz, Boolean dst) {
 		Double julianday = JD;
 		Double increment = ((next) ? 1.0 : -1.0);
 
@@ -247,27 +247,27 @@ public class SolarCalculator {
 		return julianday;
 	}
 
-	static Double calcMeanObliquityOfEcliptic(Double t) {
+	private static Double calcMeanObliquityOfEcliptic(Double t) {
 		Double seconds = 21.448 - t*(46.8150 + t*(0.00059 - t*(0.001813)));
 		Double e0 = 23.0 + (26.0 + (seconds/60.0))/60.0;
 		return e0;		// in degrees
 	}
 
-	static Double calcObliquityCorrection(Double t) {
+	private static Double calcObliquityCorrection(Double t) {
 		Double e0 = calcMeanObliquityOfEcliptic(t);
 		Double omega = 125.04 - 1934.136 * t;
 		Double e = e0 + 0.00256 * Math.cos(degToRad(omega));
 		return e;		// in degrees
 	}
 
-	static Double calcSunApparentLong(Double t) {
+	private static Double calcSunApparentLong(Double t) {
 		Double o = calcSunTrueLong(t);
 		Double omega = 125.04 - 1934.136 * t;
 		Double lambda = o - 0.00569 - 0.00478 * Math.sin(degToRad(omega));
 		return lambda;		// in degrees
 	}
 
-	static Double calcSunDeclination(Double t) {
+	private static Double calcSunDeclination(Double t) {
 		Double e = calcObliquityCorrection(t);
 		Double lambda = calcSunApparentLong(t);
 		Double sint = Math.sin(degToRad(e)) * Math.sin(degToRad(lambda));
@@ -275,7 +275,7 @@ public class SolarCalculator {
 		return theta;		// in degrees
 	}
 
-	static Double calcSunEqOfCenter(Double t) {
+	private static Double calcSunEqOfCenter(Double t) {
 		Double m = calcGeomMeanAnomalySun(t);
 		Double mrad = degToRad(m);
 		Double sinm = Math.sin(mrad);
@@ -285,18 +285,18 @@ public class SolarCalculator {
 		return C;		// in degrees
 	}
 
-	static Double calcSunTrueLong(Double t) {
+	private static Double calcSunTrueLong(Double t) {
 		Double l0 = calcGeomMeanLongSun(t);
 		Double c = calcSunEqOfCenter(t);
 		Double O = l0 + c;
 		return O;		// in degrees
 	}
 
-	static Double degToRad(Double angleDeg) {
+	private static Double degToRad(Double angleDeg) {
 		return (Math.PI * angleDeg / 180.0);
 	}
 
-	static String getDateComponent(Double jd, Boolean next) {
+	private static String getDateComponent(Double jd, Boolean next) {
 		String output;
 
 		if ( (jd < 900000) || (jd > 2817000) ) {
@@ -331,7 +331,7 @@ public class SolarCalculator {
 
 	}
 
-	static LocalDateTime getDateTimeComponent(Double JD, Double minutes, Boolean sunrise, Double lat, Double lng) {
+	private static LocalDateTime getDateTimeComponent(Double JD, Double minutes, Boolean sunrise, Double lat, Double lng) {
 		String date = getDateComponent(JD, false);
 		String time = getTimeComponent(minutes);
 
@@ -346,7 +346,7 @@ public class SolarCalculator {
 		return output;
 	}
 
-	static String getTimeComponent(Double minutes) {
+	private static String getTimeComponent(Double minutes) {
 		String output = "";
 		if ( (minutes >= 0) && (minutes < 1440) ) {
 			Double floatHour = minutes / 60.0;
@@ -372,15 +372,15 @@ public class SolarCalculator {
 		return output;
 	}
 
-	static Boolean isLeapYear(Integer yr) {
+	private static Boolean isLeapYear(Integer yr) {
 		return ((yr % 4 == 0 && yr % 100 != 0) || yr % 400 == 0);
 	}
 
-	static Double radToDeg(Double angleRad) {
+	private static Double radToDeg(Double angleRad) {
 		return (180.0 * angleRad / Math.PI);
 	}
 
-	static String zeroPad(Double m, int digits) {
+	private static String zeroPad(Double m, int digits) {
 		String n = String.valueOf(m.intValue());
 		while (n.length() < digits) {
 			n = '0' + n;
@@ -388,15 +388,14 @@ public class SolarCalculator {
 		return n;
 	}
 
-	Double calcSunRadVector(Double t) {
+	private static Double calcSunRadVector(Double t) {
 		Double v = calcSunTrueAnomaly(t);
 		Double e = calcEccentricityEarthOrbit(t);
 		Double R = (1.000001018 * (1 - e * e)) / (1 + e * Math.cos(degToRad(v)));
 		return R;		// in AUs
 	}
 
-	Double calcSunRtAscension(Double t)
-	{
+	private static Double calcSunRtAscension(Double t) {
 		Double e = calcObliquityCorrection(t);
 		Double lambda = calcSunApparentLong(t);
 		Double tananum = (Math.cos(degToRad(e)) * Math.sin(degToRad(lambda)));
@@ -405,7 +404,7 @@ public class SolarCalculator {
 		return alpha;		// in degrees
 	}
 
-	Double calcSunTrueAnomaly(Double t) {
+	private static Double calcSunTrueAnomaly(Double t) {
 		Double m = calcGeomMeanAnomalySun(t);
 		Double c = calcSunEqOfCenter(t);
 		Double v = m + c;

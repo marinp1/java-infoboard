@@ -1,7 +1,8 @@
 package fi.patrikmarin.infoboard.view;
 
-import fi.patrikmarin.infoboard.modal.GoogleEvent;
-import static fi.patrikmarin.infoboard.Utils.*;
+import static fi.patrikmarin.infoboard.utils.Utils.*;
+
+import fi.patrikmarin.infoboard.google.GoogleEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
