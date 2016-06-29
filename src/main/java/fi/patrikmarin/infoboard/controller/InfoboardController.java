@@ -1,4 +1,4 @@
-package fi.patrikmarin.infoboard.view;
+package fi.patrikmarin.infoboard.controller;
 
 import static fi.patrikmarin.infoboard.utils.Utils.*;
 
@@ -167,7 +167,7 @@ public class InfoboardController {
 					
 					// Get loader for the new google event
 			        FXMLLoader loader = new FXMLLoader();
-			        loader.setLocation(App.class.getResource("view/GoogleEventBlock.fxml"));
+			        loader.setLocation(App.class.getResource("/fxml/GoogleEventBlock.fxml"));
 			        
 			        // Get the component and update it with data
 			        GridPane googleEventBox = (GridPane) loader.load();

@@ -6,10 +6,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import fi.patrikmarin.infoboard.controller.InfoboardController;
 import fi.patrikmarin.infoboard.google.GoogleEvent;
 import fi.patrikmarin.infoboard.utils.LogLevel;
 import fi.patrikmarin.infoboard.utils.Logger;
-import fi.patrikmarin.infoboard.view.InfoboardController;
 import fi.patrikmarin.infoboard.weather.SolarCalculator;
 import fi.patrikmarin.infoboard.weather.SolarCalculatorResult;
 import fi.patrikmarin.infoboard.weather.WeatherEvent;
@@ -29,7 +29,7 @@ public class App extends Application {
 	//============================ APPLICATION VARIABLES ======================================================
     private Stage primaryStage;
     private StackPane root;
-    private Thread th;
+    private Thread updateThread;
     
     //============================= UPDATE VARIABLE ===========================================================
 	private Integer SECONDS_SINCE_LAST_UPDATE = 0;
@@ -99,11 +99,11 @@ public class App extends Application {
         primaryStage.setOnCloseRequest(
                 event -> {
                 	try {
-                    	th.interrupt();
-                    	th.join();
+                    	updateThread.interrupt();
+                    	updateThread.join();
                     	//FIXME: Create settings service
                 		//SettingsService.saveSettings();
-                    	Logger.log(LogLevel.SUCCESS, "Program closed.");
+                    	Logger.log(LogLevel.INFO, "Program closed.");
                 	} catch (Exception e) {
                 		Logger.log(LogLevel.ERROR, "Couldn't close update thread.");
                 		e.printStackTrace();
@@ -120,7 +120,7 @@ public class App extends Application {
         try {
         	
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(App.class.getResource("view/InfoboardWindow.fxml"));
+            loader.setLocation(App.class.getResource("/fxml/InfoboardWindow.fxml"));
             root = (StackPane) loader.load();
             
             Scene scene = new Scene(root);
@@ -169,8 +169,8 @@ public class App extends Application {
             }
         };
         
-        th = new Thread(task);
-        th.start();
+        updateThread = new Thread(task);
+        updateThread.start();
     }
     
     /**

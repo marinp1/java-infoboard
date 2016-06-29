@@ -1,5 +1,5 @@
 package fi.patrikmarin.infoboard.google;
 
-public class GoogleCalendarEvent {
+public class GoogleCalendarEvent extends GoogleEvent {
 
 }

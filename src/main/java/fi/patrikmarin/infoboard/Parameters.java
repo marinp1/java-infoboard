@@ -1,4 +1,4 @@
-package fi.patrikmarin.infoboard.utils;
+package fi.patrikmarin.infoboard;
 
 /**
  * Adjustable program parameters.

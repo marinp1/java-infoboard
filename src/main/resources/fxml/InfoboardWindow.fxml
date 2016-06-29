@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<StackPane styleClass="background-img" stylesheets="@master.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.patrikmarin.infoboard.view.InfoboardController">
+<StackPane styleClass="background-img" stylesheets="@/css/master.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.patrikmarin.infoboard.controller.InfoboardController">
    <children>
       <AnchorPane minHeight="800.0" minWidth="600.0" styleClass="body">
          <children>

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane fx:id="googleEventBox" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.patrikmarin.infoboard.view.GoogleEventController">
+<GridPane fx:id="googleEventBox" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.patrikmarin.infoboard.controller.GoogleEventController">
    <children>
       <Label fx:id="googleEventTimeLabel" text="18:00" GridPane.hgrow="NEVER">
          <styleClass>

@@ -1,4 +1,4 @@
-package fi.patrikmarin.infoboard.view;
+package fi.patrikmarin.infoboard.controller;
 
 import static fi.patrikmarin.infoboard.utils.Utils.*;
 
@@ -21,8 +21,8 @@ public class GoogleEventController {
 	private Label googleEventInfoLabel;
 	
 	public void addEvent(GoogleEvent ge) {
-		googleEventTimeLabel.setText(ge.getStart().format(timeFormat));
-		googleEventTitleLabel.setText(ge.getSummary());
-		googleEventInfoLabel.setText(ge.getDescription());
+//		googleEventTimeLabel.setText(ge.getStart().format(timeFormat));
+//		googleEventTitleLabel.setText(ge.getSummary());
+//		googleEventInfoLabel.setText(ge.getDescription());
 	}
 }

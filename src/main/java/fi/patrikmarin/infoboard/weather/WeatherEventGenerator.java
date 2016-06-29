@@ -1,6 +1,6 @@
 package fi.patrikmarin.infoboard.weather;
 
-import static fi.patrikmarin.infoboard.utils.Parameters.*;
+import static fi.patrikmarin.infoboard.Parameters.*;
 import static fi.patrikmarin.infoboard.utils.Utils.*;
 
 import java.io.FileInputStream;

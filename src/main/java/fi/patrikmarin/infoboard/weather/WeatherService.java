@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import fi.patrikmarin.infoboard.Keys;
+import fi.patrikmarin.infoboard.Parameters;
 import fi.patrikmarin.infoboard.utils.LogLevel;
 import fi.patrikmarin.infoboard.utils.Logger;
-import fi.patrikmarin.infoboard.utils.Parameters;
 
 public class WeatherService {
 	

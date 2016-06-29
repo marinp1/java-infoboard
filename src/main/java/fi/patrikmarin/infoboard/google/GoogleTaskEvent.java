@@ -1,5 +1,5 @@
 package fi.patrikmarin.infoboard.google;
 
-public class GoogleTaskEvent {
+public class GoogleTaskEvent extends GoogleEvent {
 
 }
