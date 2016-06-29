@@ -387,27 +387,4 @@ public class SolarCalculator {
 		}
 		return n;
 	}
-
-	private static Double calcSunRadVector(Double t) {
-		Double v = calcSunTrueAnomaly(t);
-		Double e = calcEccentricityEarthOrbit(t);
-		Double R = (1.000001018 * (1 - e * e)) / (1 + e * Math.cos(degToRad(v)));
-		return R;		// in AUs
-	}
-
-	private static Double calcSunRtAscension(Double t) {
-		Double e = calcObliquityCorrection(t);
-		Double lambda = calcSunApparentLong(t);
-		Double tananum = (Math.cos(degToRad(e)) * Math.sin(degToRad(lambda)));
-		Double tanadenom = (Math.cos(degToRad(lambda)));
-		Double alpha = radToDeg(Math.atan2(tananum, tanadenom));
-		return alpha;		// in degrees
-	}
-
-	private static Double calcSunTrueAnomaly(Double t) {
-		Double m = calcGeomMeanAnomalySun(t);
-		Double c = calcSunEqOfCenter(t);
-		Double v = m + c;
-		return v;		// in degrees
-	}
 }

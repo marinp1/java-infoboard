@@ -8,9 +8,9 @@ import java.util.HashMap;
 
 import fi.patrikmarin.infoboard.controller.InfoboardController;
 import fi.patrikmarin.infoboard.google.GoogleEvent;
+import fi.patrikmarin.infoboard.google.GoogleService;
 import fi.patrikmarin.infoboard.utils.LogLevel;
 import fi.patrikmarin.infoboard.utils.Logger;
-import fi.patrikmarin.infoboard.weather.SolarCalculator;
 import fi.patrikmarin.infoboard.weather.SolarCalculatorResult;
 import fi.patrikmarin.infoboard.weather.WeatherEvent;
 import fi.patrikmarin.infoboard.weather.WeatherService;
@@ -19,8 +19,6 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
@@ -62,12 +60,12 @@ public class App extends Application {
 
     /**
      * Updates application data with service classes.
-     * TODO: Service classes
      */
     private void updateData() {
     	sunrise = WeatherService.getSunriseSet(SolarCalculatorResult.SUNRISE);
     	sunset = WeatherService.getSunriseSet(SolarCalculatorResult.SUNSET);
     	weatherData = WeatherService.getWeatherForecast();
+    	eventData = GoogleService.getGoogleEvents();
     }
 
     /**

@@ -9,6 +9,34 @@ import com.google.api.client.util.DateTime;
  */
 public abstract class GoogleEvent implements Comparable<GoogleEvent> {
 	
+	private String ID;
+	private GoogleEventContainer parent;
+	
+	/** 
+	 * The constructor fo the superclass.
+	 * @param ID the ID of the element.
+	 */
+	protected GoogleEvent(String ID, GoogleEventContainer parent) {
+		this.ID = ID;
+		this.parent = parent;
+	}
+	
+	public String getID() {
+		return ID;
+	}
+	
+	public void setID(String iD) {
+		ID = iD;
+	}
+	
+	public GoogleEventContainer getParent() {
+		return parent;
+	}
+	
+	public void setParent(GoogleEventContainer parent) {
+		this.parent = parent;
+	}
+	
 	/**
 	 * The DateTime which is used for comparing objects.
 	 * Must be defined for all subclasses.
