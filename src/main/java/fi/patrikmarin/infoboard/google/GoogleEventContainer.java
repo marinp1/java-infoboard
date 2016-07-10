@@ -13,6 +13,10 @@ public class GoogleEventContainer {
 	private Boolean enabled;
 	private GoogleContainerType type;
 	
+	protected GoogleEventContainer(GoogleContainerType type) {
+		this.type = type;
+	}
+	
 	protected GoogleEventContainer(String ID, String name, Color color, Boolean enabled, GoogleContainerType type) {
 		this.ID = ID;
 		this.name = name;

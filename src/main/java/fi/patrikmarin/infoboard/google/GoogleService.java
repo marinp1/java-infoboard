@@ -82,9 +82,18 @@ public class GoogleService {
      */
     public static HashMap<LocalDate, ArrayList<GoogleEvent>> getGoogleEvents() {
     	HashMap<LocalDate, ArrayList<GoogleEvent>> googleEvents = new HashMap<LocalDate, ArrayList<GoogleEvent>>();
-    	
-    	
-    	
+        	
+    	try {
+    		com.google.api.services.calendar.Calendar cService = getCalendarService();
+    		com.google.api.services.tasks.Tasks tService = getTasksService();
+    		
+    		googleEventContainers = GoogleEventGenerator.getGoogleEventContainers(cService, tService);
+    		
+    		
+    	} catch (Exception e) {
+    		
+    	}
+
     	return googleEvents;
     }
 }
