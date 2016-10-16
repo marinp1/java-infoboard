@@ -92,7 +92,7 @@ public class GoogleService {
     		googleEventContainers = GoogleEventGenerator.getGoogleEventContainers(cService, tService);
     		googleEvents = GoogleEventGenerator.getGoogleEvents(googleEventContainers, cService, tService);
     		
-    		// Populate date hashmap from events
+    		// Populate date map from events
     		for (GoogleEvent event : googleEvents) {
     			
     			LocalDate ld = event.compareBy.toLocalDate();

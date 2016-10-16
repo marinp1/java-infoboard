@@ -23,6 +23,7 @@ public class GoogleEventController {
 	@FXML
 	private Label googleEventInfoLabel;
 	
+	//TODO: The label names are completely wrong
 	public void addEvent(GoogleEvent ge) {
 		
 		if (ge.getParent().getType() == GoogleContainerType.CALENDAR) {
@@ -35,7 +36,7 @@ public class GoogleEventController {
 			if (location != null) {
 				titleLabel += " - " + location;
 			}
-			 
+			
 			googleEventTimeLabel.setText(gce.getStartDateTime().format(timeFormat));
 			googleEventTitleLabel.setText(titleLabel);
 			googleEventInfoLabel.setText(gce.getSummary());
@@ -43,9 +44,10 @@ public class GoogleEventController {
 		} else {
 			GoogleTaskEvent gte = (GoogleTaskEvent) ge;
 
-			googleEventTimeLabel.setText(gte.getDue().format(timeFormat));
-			googleEventTitleLabel.setText(gte.getTitle());
-			googleEventInfoLabel.setText(gte.getNotes());
+			// Dont display task due time
+			googleEventTimeLabel.setText(gte.getTitle());
+			googleEventTitleLabel.setText(gte.getNotes());
+			googleEventInfoLabel.setText("");
 		}
 
 	}

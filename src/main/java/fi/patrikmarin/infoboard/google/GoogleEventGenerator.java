@@ -16,6 +16,7 @@ import com.google.api.services.calendar.model.ColorDefinition;
 import com.google.api.services.calendar.model.Colors;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.tasks.Tasks;
+import com.google.api.services.tasks.model.Task;
 import com.google.api.services.tasks.model.TaskList;
 import com.google.api.services.tasks.model.TaskLists;
 
@@ -126,6 +127,7 @@ public class GoogleEventGenerator {
         
         List<Event> items = ev.getItems();
             
+        // Add each event to the list
         for (Event event : items) {
         	
         	// If end time is not defined, use date
@@ -159,11 +161,29 @@ public class GoogleEventGenerator {
 		return googleCalendarEvents;
 	}
 
-	private static ArrayList<GoogleTaskEvent> getGoogleTaskEvents(Tasks taskService, GoogleEventContainer container) {
+	private static ArrayList<GoogleTaskEvent> getGoogleTaskEvents(Tasks taskService, GoogleEventContainer container) throws IOException {
 		ArrayList<GoogleTaskEvent> googleTaskEvents = new ArrayList<GoogleTaskEvent>();
 
-		
+		com.google.api.services.tasks.model.Tasks tasklist = taskService.tasks().list(container.getID())
+				.setDueMin(new DateTime(System.currentTimeMillis()).toStringRfc3339())
+				.execute();
 
+		// Get all tasks from tasklist
+    	for (Task task : tasklist.getItems()) {
+    	  
+    	  GoogleTaskEvent tEvent = new GoogleTaskEvent(
+    			  task.getId(),
+    			  container,
+    			  task.getTitle(),
+    			  (task.getNotes() == null) ? "" : task.getNotes(),
+    			  (task.getDue() == null) ? null : task.getDue(),
+    			  (task.getCompleted() == null) ? false : true
+    			  );
+    	  
+    	  googleTaskEvents.add(tEvent);
+    	  
+    	}
+    	
 		return googleTaskEvents;
 	}
 
