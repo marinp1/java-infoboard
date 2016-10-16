@@ -1,5 +1,8 @@
 package fi.patrikmarin.infoboard.google;
 
+import fi.patrikmarin.infoboard.utils.Utils;
+import java.time.LocalDateTime;
+
 import com.google.api.client.util.DateTime;
 
 /**
@@ -9,7 +12,7 @@ public class GoogleTaskEvent extends GoogleEvent {
 
 	private String title;
 	private String notes;
-	private DateTime due;
+	private LocalDateTime due;
 	private Boolean completed;
 	
 	/**
@@ -28,8 +31,10 @@ public class GoogleTaskEvent extends GoogleEvent {
 		
 		this.title = title;
 		this.notes = notes;
-		this.due = due;
+		this.due = Utils.parseGoogleDate(due.toStringRfc3339());
 		this.completed = completed;
+		
+		this.compareBy = Utils.parseGoogleDate(due.toStringRfc3339());
 	}
 	
 	public String getTitle() {
@@ -48,11 +53,11 @@ public class GoogleTaskEvent extends GoogleEvent {
 		this.notes = notes;
 	}
 	
-	public DateTime getDue() {
+	public LocalDateTime getDue() {
 		return due;
 	}
 	
-	public void setDue(DateTime due) {
+	public void setDue(LocalDateTime due) {
 		this.due = due;
 	}
 	

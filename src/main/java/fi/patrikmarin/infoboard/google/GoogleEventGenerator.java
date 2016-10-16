@@ -2,14 +2,19 @@ package fi.patrikmarin.infoboard.google;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.Calendar;
+import com.google.api.services.calendar.Calendar.Events;
 import com.google.api.services.calendar.model.CalendarList;
 import com.google.api.services.calendar.model.CalendarListEntry;
 import com.google.api.services.calendar.model.ColorDefinition;
 import com.google.api.services.calendar.model.Colors;
+import com.google.api.services.calendar.model.Event;
 import com.google.api.services.tasks.Tasks;
 import com.google.api.services.tasks.model.TaskList;
 import com.google.api.services.tasks.model.TaskLists;
@@ -82,22 +87,82 @@ public class GoogleEventGenerator {
 				googleEventContainers.add(taskList);
 			}
 		}
-
+		
 		return googleEventContainers;
 	}
+	
+	
+	protected static ArrayList<GoogleEvent> getGoogleEvents(ArrayList<GoogleEventContainer> eventContainers, Calendar calendarService, Tasks taskService) throws IOException {
+		
+		ArrayList<GoogleEvent> events = new ArrayList<GoogleEvent>();
+		
+		for (GoogleEventContainer eventContainer : eventContainers) {
+			if (eventContainer.getType() == GoogleContainerType.CALENDAR) {
+				for (GoogleCalendarEvent cEvent : getGoogleCalendarEvents(calendarService, eventContainer)) {
+					events.add(cEvent);
+				}
+			} else {
+				for (GoogleTaskEvent tEvent : getGoogleTaskEvents(taskService, eventContainer)) {
+					events.add(tEvent);
+				}
+			}
+		}
+		
+		Collections.sort(events);
+		
+		return events;
+	}
 
-	protected static ArrayList<GoogleCalendarEvent> getGoogleCalendarEvents(Calendar calendarService) throws IOException {		
+	private static ArrayList<GoogleCalendarEvent> getGoogleCalendarEvents(Calendar calendarService, GoogleEventContainer container) throws IOException {		
 		ArrayList<GoogleCalendarEvent> googleCalendarEvents = new ArrayList<GoogleCalendarEvent>();
 
-
-
+		// Get at most 5 entries from the calendar
+        com.google.api.services.calendar.model.Events ev = calendarService.events().list(container.getID())
+                .setMaxResults(5)
+                .setTimeMin(new DateTime(System.currentTimeMillis()))
+                .setOrderBy("startTime")
+                .setSingleEvents(true)
+                .execute();
+        
+        List<Event> items = ev.getItems();
+            
+        for (Event event : items) {
+        	
+        	// If end time is not defined, use date
+            DateTime start = event.getStart().getDateTime();
+            if (start == null) {
+                start = event.getStart().getDate();
+            }
+            
+            // If end time is not defined, use date
+            DateTime end = event.getEnd().getDateTime();
+            if (end == null) {
+            	end = event.getEnd().getDate();
+            }
+            
+            // Construct new event
+            GoogleCalendarEvent cEvent = new GoogleCalendarEvent(
+            		event.getId(),
+            		container,
+            		event.getSummary(),
+            		event.getLocation(),
+            		event.getDescription(),
+            		eventColorKeys.get(event.getColorId()),
+            		start,
+            		end
+            		);
+            
+            
+            googleCalendarEvents.add(cEvent);
+        }
+		
 		return googleCalendarEvents;
 	}
 
-	protected static ArrayList<GoogleTaskEvent> getGoogleTaskEvents(Tasks taskService) {
+	private static ArrayList<GoogleTaskEvent> getGoogleTaskEvents(Tasks taskService, GoogleEventContainer container) {
 		ArrayList<GoogleTaskEvent> googleTaskEvents = new ArrayList<GoogleTaskEvent>();
 
-
+		
 
 		return googleTaskEvents;
 	}

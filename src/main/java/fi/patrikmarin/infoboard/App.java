@@ -40,6 +40,8 @@ public class App extends Application {
     public static LocalDateTime sunrise;
     public static LocalDateTime sunset;
     
+    
+    
     /**
      * Constructor for the main application.
      * TODO: Replace dummy data with service classes

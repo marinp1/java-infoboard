@@ -1,7 +1,11 @@
 package fi.patrikmarin.infoboard.utils;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+
+import com.google.api.client.util.DateTime;
 
 /**
  * Common utilities for the program.
@@ -109,6 +113,32 @@ public class Utils {
 		}
 		
 		return weatherMap.get(weatherKey);
+	}
+	
+	// DATE TIME HELPERS
+	
+	public static LocalDateTime parseGoogleDate(String s) {
+		DateTimeFormatter gDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter gTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+		DateTimeFormatter gTimeFormat2 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		
+		try {
+			if (s.contains(":")) {
+				if (s.endsWith("Z")) {
+					return LocalDateTime.parse(s, gTimeFormat2);
+				} else {
+	            	int finalInd = s.lastIndexOf(":");
+	            	String s2 = s.substring(0, finalInd) + s.substring(finalInd + 1);
+					
+					return LocalDateTime.parse(s2, gTimeFormat);
+				}
+			} else {
+				return LocalDate.parse(s, gDateFormat).atStartOfDay();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	// CUSTOM EXCEPTIONS

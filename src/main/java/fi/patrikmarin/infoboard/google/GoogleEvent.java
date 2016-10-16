@@ -1,6 +1,6 @@
 package fi.patrikmarin.infoboard.google;
 
-import com.google.api.client.util.DateTime;
+import java.time.LocalDateTime;
 
 /**
  * Abstract class representing both
@@ -13,7 +13,7 @@ public abstract class GoogleEvent implements Comparable<GoogleEvent> {
 	private GoogleEventContainer parent;
 	
 	/** 
-	 * The constructor fo the superclass.
+	 * The constructor for the superclass.
 	 * @param ID the ID of the element.
 	 */
 	protected GoogleEvent(String ID, GoogleEventContainer parent) {
@@ -41,7 +41,7 @@ public abstract class GoogleEvent implements Comparable<GoogleEvent> {
 	 * The DateTime which is used for comparing objects.
 	 * Must be defined for all subclasses.
 	 */
-	protected DateTime compareBy;
+	protected LocalDateTime compareBy;
 	
 	/**
 	 * The comparison function for Google events.
@@ -50,6 +50,6 @@ public abstract class GoogleEvent implements Comparable<GoogleEvent> {
 	 */
 	@Override
 	public int compareTo(GoogleEvent ev) {
-		return Long.compare(this.compareBy.getValue(), ev.compareBy.getValue());
+		return this.compareBy.compareTo(ev.compareBy);
 	}
 }

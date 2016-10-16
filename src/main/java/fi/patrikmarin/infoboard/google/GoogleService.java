@@ -38,6 +38,8 @@ public class GoogleService {
 	public static ArrayList<String> hiddenContainerIDs = new ArrayList<String>();
 	
 	private static ArrayList<GoogleEventContainer> googleEventContainers = new ArrayList<GoogleEventContainer>();
+	private static ArrayList<GoogleEvent> googleEvents = new ArrayList<GoogleEvent>();
+
 	
     static {
         try {
@@ -51,7 +53,7 @@ public class GoogleService {
     
     /**
      * Build and return an authorized Calendar client service.
-     * @return an authorized Calendar client serviceprotected
+     * @return an authorized Calendar client service
      * @throws IOException
      */
     private static com.google.api.services.calendar.Calendar getCalendarService() throws IOException {
@@ -81,19 +83,34 @@ public class GoogleService {
      * @return
      */
     public static HashMap<LocalDate, ArrayList<GoogleEvent>> getGoogleEvents() {
-    	HashMap<LocalDate, ArrayList<GoogleEvent>> googleEvents = new HashMap<LocalDate, ArrayList<GoogleEvent>>();
+    	HashMap<LocalDate, ArrayList<GoogleEvent>> googleEventMap = new HashMap<LocalDate, ArrayList<GoogleEvent>>();
         	
     	try {
     		com.google.api.services.calendar.Calendar cService = getCalendarService();
     		com.google.api.services.tasks.Tasks tService = getTasksService();
     		
+    		// Get content from google servers
     		googleEventContainers = GoogleEventGenerator.getGoogleEventContainers(cService, tService);
+    		googleEvents = GoogleEventGenerator.getGoogleEvents(googleEventContainers, cService, tService);
+    		
+    		// Populate date hashmap from events
+    		for (GoogleEvent event : googleEvents) {
+    			
+    			LocalDate ld = event.compareBy.toLocalDate();
+    			
+    			if (googleEventMap.containsKey(ld)) {
+    				googleEventMap.get(ld).add(event);
+    			} else {
+    				googleEventMap.put(ld, new ArrayList<GoogleEvent>());
+    				googleEventMap.get(ld).add(event);
+    			}
+    		}
     		
     		
     	} catch (Exception e) {
     		
     	}
 
-    	return googleEvents;
+    	return googleEventMap;
     }
 }
