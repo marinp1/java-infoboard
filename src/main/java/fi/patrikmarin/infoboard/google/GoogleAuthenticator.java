@@ -59,7 +59,7 @@ public class GoogleAuthenticator {
      */
     protected Credential getCredentials() {
     	if (credential == null || credential.getExpiresInSeconds() <= 300) {
-    		authorize();
+    		credential = authorize();
     	}
     	
     	if (credential == null) {

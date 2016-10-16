@@ -17,6 +17,7 @@ public class GoogleCalendarEvent extends GoogleEvent {
 	private Color color;
 	private LocalDateTime startDateTime;
 	private LocalDateTime endDateTime;
+	private String length;
 	
 	/**
 	 * The constructor for calendar event.
@@ -41,6 +42,8 @@ public class GoogleCalendarEvent extends GoogleEvent {
 		this.startDateTime = Utils.parseGoogleDate(startDateTime.toStringRfc3339());
 		this.endDateTime = Utils.parseGoogleDate(endDateTime.toStringRfc3339());
 		
+		this.length = Utils.dateTimeDifference(this.startDateTime, this.endDateTime);
+		
 		this.compareBy = this.startDateTime;
 	}
 	
@@ -53,7 +56,7 @@ public class GoogleCalendarEvent extends GoogleEvent {
 	}
 	
 	public String getLocation() {
-		return location;
+		return location; 
 	}
 	
 	public void setLocation(String location) {
@@ -90,5 +93,9 @@ public class GoogleCalendarEvent extends GoogleEvent {
 	
 	public void setEndDateTime(LocalDateTime endDateTime) {
 		this.endDateTime = endDateTime;
+	}
+	
+	public String getLength() {
+		return this.length;
 	}
 }

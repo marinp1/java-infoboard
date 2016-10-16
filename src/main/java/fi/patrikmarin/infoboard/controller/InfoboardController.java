@@ -7,9 +7,11 @@ import java.time.LocalDateTime;
 
 import fi.patrikmarin.infoboard.App;
 import fi.patrikmarin.infoboard.google.GoogleEvent;
+import fi.patrikmarin.infoboard.google.GoogleService;
 import fi.patrikmarin.infoboard.weather.WeatherEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -153,9 +155,9 @@ public class InfoboardController {
 			for (LocalDate ld : app.getGoogleEventData().keySet()) {
 				// Create container for each day
 				VBox dayContainer = new VBox();
-				dayContainer.setSpacing(20);
-				// Add date label to the container
+				dayContainer.setSpacing(10);
 				
+				// Add date label to the container
 				Label dayLabel = new Label(ld.format(dateFormat));
 				dayLabel.setAlignment(Pos.BOTTOM_LEFT);
 				dayLabel.getStyleClass().add("secondary-color");
@@ -165,19 +167,25 @@ public class InfoboardController {
 				// Loop through all events for the day
 				for (GoogleEvent ge : app.getGoogleEventData().get(ld)) {
 					
-					// Get loader for the new google event
-			        FXMLLoader loader = new FXMLLoader();
-			        loader.setLocation(App.class.getResource("/fxml/GoogleEventBlock.fxml"));
-			        
-			        // Get the component and update it with data
-			        GridPane googleEventBox = (GridPane) loader.load();
-		            GoogleEventController controller = loader.getController();
-		            
-		            controller.addEvent(ge);
-		            
-		            // Add the generated google event to the day container
-		            dayContainer.getChildren().add(googleEventBox);
+					if (!GoogleService.hiddenContainerIDs.contains(ge.getID())) {
+						// Get loader for the new google event
+				        FXMLLoader loader = new FXMLLoader();
+				        loader.setLocation(App.class.getResource("/fxml/GoogleEventBlock.fxml"));
+				        
+				        // Get the component and update it with data
+				        GridPane googleEventBox = (GridPane) loader.load();
+			            GoogleEventController controller = loader.getController();
+			            
+			            controller.addEvent(ge);
+			            
+			            // Add the generated google event to the day container
+			            dayContainer.getChildren().add(googleEventBox);
+					}
+
 				}
+				
+				// Add margins to box
+				VBox.setMargin(dayContainer, new Insets(0,0,20,0));
 	            
 				// Add the day container to the google component
 	            googleBox.getChildren().add(dayContainer);

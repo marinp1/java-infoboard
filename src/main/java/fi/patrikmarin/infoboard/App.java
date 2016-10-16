@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 import fi.patrikmarin.infoboard.controller.InfoboardController;
 import fi.patrikmarin.infoboard.google.GoogleEvent;
@@ -36,7 +37,7 @@ public class App extends Application {
     
     //==================================== DATA ===============================================================
     private ArrayList<WeatherEvent> weatherData = new ArrayList<WeatherEvent>();
-    private HashMap<LocalDate, ArrayList<GoogleEvent>> eventData = new HashMap<LocalDate, ArrayList<GoogleEvent>>();
+    private TreeMap<LocalDate, ArrayList<GoogleEvent>> eventData = new TreeMap<LocalDate, ArrayList<GoogleEvent>>();
     public static LocalDateTime sunrise;
     public static LocalDateTime sunset;
     
@@ -48,16 +49,6 @@ public class App extends Application {
      */
     public App() {
     	updateData();
-    	
-        // Add some sample data
-//    	weatherData.add(new WeatherEvent(LocalDateTime.now(), -10, 1));
-//    	weatherData.add(new WeatherEvent(LocalDateTime.now(), 15, 2));
-//    	
-//    	ArrayList<GoogleEvent> eventList = new ArrayList<GoogleEvent>();
-//    	eventList.add(new GoogleEvent("ID", "summary", "paikka", "kuvaus", Color.BLACK, LocalDateTime.now(), LocalDateTime.now().plusHours(2)));
-//    	eventList.add(new GoogleEvent("ID", "summary", "paikka", "kuvaus", Color.BLACK, LocalDateTime.now(), LocalDateTime.now().plusHours(2)));
-//    	
-//    	eventData.put(LocalDate.now(), eventList);
     }
 
     /**
@@ -82,7 +73,7 @@ public class App extends Application {
      * Returns gathered data from google calendar and google tasks.
      * @return
      */
-    public HashMap<LocalDate, ArrayList<GoogleEvent>> getGoogleEventData() {
+    public TreeMap<LocalDate, ArrayList<GoogleEvent>> getGoogleEventData() {
     	return eventData;
     }
     

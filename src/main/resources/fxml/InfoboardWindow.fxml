@@ -107,7 +107,7 @@
                         </HBox>
                         <VBox fx:id="googleBox" prefWidth="100.0" styleClass="googleblock">
                            <children>
-                              <VBox prefWidth="100.0" spacing="10.0">
+                              <VBox prefWidth="100.0" spacing="20.0">
                                  <children>
                                     <Label styleClass="secondary-color" text="Today" />
                                     <GridPane vgap="15.0">

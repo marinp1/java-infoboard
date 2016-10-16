@@ -3,6 +3,7 @@ package fi.patrikmarin.infoboard.utils;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 
 import com.google.api.client.util.DateTime;
@@ -139,6 +140,41 @@ public class Utils {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public static String dateTimeDifference(LocalDateTime start, LocalDateTime end) {
+		LocalDateTime tempDateTime = LocalDateTime.from(start);
+
+		long years = tempDateTime.until(end, ChronoUnit.YEARS);
+		tempDateTime = tempDateTime.plusYears( years );
+
+		long months = tempDateTime.until(end, ChronoUnit.MONTHS);
+		tempDateTime = tempDateTime.plusMonths( months );
+
+		long days = tempDateTime.until(end, ChronoUnit.DAYS);
+		tempDateTime = tempDateTime.plusDays( days );
+
+		long hours = tempDateTime.until(end, ChronoUnit.HOURS);
+		tempDateTime = tempDateTime.plusHours( hours );
+
+		long minutes = tempDateTime.until(end, ChronoUnit.MINUTES);
+		tempDateTime = tempDateTime.plusMinutes( minutes );
+
+		long seconds = tempDateTime.until(end, ChronoUnit.SECONDS);
+		
+		if (minutes == 0 && hours == 0 && days == 1) {
+			return "All day";
+		}
+		
+		if (hours == 0) {
+			return minutes + "min";
+		}
+		
+		if (minutes == 0) {
+			return hours + "h";
+		}
+		
+		return hours + "h " + minutes + "min";
 	}
 	
 	// CUSTOM EXCEPTIONS

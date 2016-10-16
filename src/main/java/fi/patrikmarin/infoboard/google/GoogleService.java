@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
@@ -40,8 +41,13 @@ public class GoogleService {
 	private static ArrayList<GoogleEventContainer> googleEventContainers = new ArrayList<GoogleEventContainer>();
 	private static ArrayList<GoogleEvent> googleEvents = new ArrayList<GoogleEvent>();
 
-	
-    static {
+    /**
+     * Build and return an authorized Calendar client service.
+     * @return an authorized Calendar client service
+     * @throws IOException
+     */
+    private static com.google.api.services.calendar.Calendar getCalendarService() throws IOException {
+    	
         try {
             HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
             AUTHENTICATOR = new GoogleAuthenticator();
@@ -49,14 +55,7 @@ public class GoogleService {
         	Logger.log(LogLevel.ERROR, "Error with initialising Google authentication.");
             e.printStackTrace();
         }
-    }
-    
-    /**
-     * Build and return an authorized Calendar client service.
-     * @return an authorized Calendar client service
-     * @throws IOException
-     */
-    private static com.google.api.services.calendar.Calendar getCalendarService() throws IOException {
+    	
         Credential credential = AUTHENTICATOR.getCredentials();
         return new com.google.api.services.calendar.Calendar.Builder(
         		GoogleService.HTTP_TRANSPORT, GoogleService.JSON_FACTORY, credential)
@@ -82,8 +81,8 @@ public class GoogleService {
      * tasks and return combined and sorted hashmap of events.
      * @return
      */
-    public static HashMap<LocalDate, ArrayList<GoogleEvent>> getGoogleEvents() {
-    	HashMap<LocalDate, ArrayList<GoogleEvent>> googleEventMap = new HashMap<LocalDate, ArrayList<GoogleEvent>>();
+    public static TreeMap<LocalDate, ArrayList<GoogleEvent>> getGoogleEvents() {
+    	TreeMap<LocalDate, ArrayList<GoogleEvent>> googleEventMap = new TreeMap<LocalDate, ArrayList<GoogleEvent>>();
         	
     	try {
     		com.google.api.services.calendar.Calendar cService = getCalendarService();

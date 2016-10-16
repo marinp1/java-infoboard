@@ -64,6 +64,7 @@
 
 .googleblock {
 	-fx-font-size: 36px;
+	-fx-padding: 0 0 10px 0;
 }
 
 .googleblock-main {

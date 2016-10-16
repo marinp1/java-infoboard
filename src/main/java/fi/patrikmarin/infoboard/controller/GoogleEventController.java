@@ -2,7 +2,10 @@ package fi.patrikmarin.infoboard.controller;
 
 import static fi.patrikmarin.infoboard.utils.Utils.*;
 
+import fi.patrikmarin.infoboard.google.GoogleCalendarEvent;
+import fi.patrikmarin.infoboard.google.GoogleContainerType;
 import fi.patrikmarin.infoboard.google.GoogleEvent;
+import fi.patrikmarin.infoboard.google.GoogleTaskEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -21,8 +24,29 @@ public class GoogleEventController {
 	private Label googleEventInfoLabel;
 	
 	public void addEvent(GoogleEvent ge) {
-//		googleEventTimeLabel.setText(ge.getStart().format(timeFormat));
-//		googleEventTitleLabel.setText(ge.getSummary());
-//		googleEventInfoLabel.setText(ge.getDescription());
+		
+		if (ge.getParent().getType() == GoogleContainerType.CALENDAR) {
+			GoogleCalendarEvent gce = (GoogleCalendarEvent) ge;
+			
+			String location = gce.getLocation();
+			
+			String titleLabel = gce.getLength();
+			
+			if (location != null) {
+				titleLabel += " - " + location;
+			}
+			 
+			googleEventTimeLabel.setText(gce.getStartDateTime().format(timeFormat));
+			googleEventTitleLabel.setText(titleLabel);
+			googleEventInfoLabel.setText(gce.getSummary());
+			
+		} else {
+			GoogleTaskEvent gte = (GoogleTaskEvent) ge;
+
+			googleEventTimeLabel.setText(gte.getDue().format(timeFormat));
+			googleEventTitleLabel.setText(gte.getTitle());
+			googleEventInfoLabel.setText(gte.getNotes());
+		}
+
 	}
 }
