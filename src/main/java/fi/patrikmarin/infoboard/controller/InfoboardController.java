@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import fi.patrikmarin.infoboard.App;
+import fi.patrikmarin.infoboard.Parameters;
 import fi.patrikmarin.infoboard.google.GoogleEvent;
 import fi.patrikmarin.infoboard.google.GoogleService;
 import fi.patrikmarin.infoboard.weather.WeatherEvent;
@@ -151,8 +152,15 @@ public class InfoboardController {
 	private void setGoogleComponent() {
 		try {
 			
+			int eventCount = 0;
+			
 			// Loop through data found in the application
 			for (LocalDate ld : app.getGoogleEventData().keySet()) {
+				
+				if (eventCount >= Parameters.EVENT_COUNT) {
+					break;
+				}
+				
 				// Create container for each day
 				VBox dayContainer = new VBox();
 				dayContainer.setSpacing(10);
@@ -177,9 +185,14 @@ public class InfoboardController {
 			            GoogleEventController controller = loader.getController();
 			            
 			            controller.addEvent(ge);
-			            
+
 			            // Add the generated google event to the day container
 			            dayContainer.getChildren().add(googleEventBox);
+			            
+			            eventCount += 1;
+			            if (eventCount == Parameters.EVENT_COUNT) {
+			            	break;
+			            }
 					}
 
 				}

@@ -37,9 +37,16 @@ public class GoogleEventController {
 				titleLabel += " - " + location;
 			}
 			
-			googleEventTimeLabel.setText(gce.getStartDateTime().format(timeFormat));
+			if (gce.getLength().equals("All day")) {
+				googleEventTimeLabel.setText(gce.getSummary());
+				googleEventInfoLabel.setText("");
+			} else {
+				googleEventTimeLabel.setText(gce.getStartDateTime().format(timeFormat));
+				googleEventInfoLabel.setText(gce.getSummary());
+			}
+			
 			googleEventTitleLabel.setText(titleLabel);
-			googleEventInfoLabel.setText(gce.getSummary());
+			
 			
 		} else {
 			GoogleTaskEvent gte = (GoogleTaskEvent) ge;

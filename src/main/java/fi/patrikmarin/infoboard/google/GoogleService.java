@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -83,6 +82,8 @@ public class GoogleService {
      */
     public static TreeMap<LocalDate, ArrayList<GoogleEvent>> getGoogleEvents() {
     	TreeMap<LocalDate, ArrayList<GoogleEvent>> googleEventMap = new TreeMap<LocalDate, ArrayList<GoogleEvent>>();
+    	
+    	Logger.log(LogLevel.INFO, "Trying to fetch Google events.");
         	
     	try {
     		com.google.api.services.calendar.Calendar cService = getCalendarService();
@@ -105,11 +106,13 @@ public class GoogleService {
     			}
     		}
     		
+    		Logger.log(LogLevel.INFO, "Tasks and calendar events fetched successfully.");
     		
     	} catch (Exception e) {
-    		
+    		Logger.log(LogLevel.ERROR, "Error with Google events: " + e.getMessage());
     	}
-
+    	
+    	
     	return googleEventMap;
     }
 }

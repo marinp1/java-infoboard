@@ -9,7 +9,7 @@
 }
 
 .background-img {
-	-fx-background-image: url('/images/3.jpg');
+	-fx-background-image: url('/images/1.jpg');
 	-fx-background-position: center center;
 	-fx-background-size: cover;
 }

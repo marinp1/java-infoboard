@@ -2,14 +2,12 @@ package fi.patrikmarin.infoboard.google;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.Calendar;
-import com.google.api.services.calendar.Calendar.Events;
 import com.google.api.services.calendar.model.CalendarList;
 import com.google.api.services.calendar.model.CalendarListEntry;
 import com.google.api.services.calendar.model.ColorDefinition;
@@ -164,8 +162,9 @@ public class GoogleEventGenerator {
 	private static ArrayList<GoogleTaskEvent> getGoogleTaskEvents(Tasks taskService, GoogleEventContainer container) throws IOException {
 		ArrayList<GoogleTaskEvent> googleTaskEvents = new ArrayList<GoogleTaskEvent>();
 
+		// Show all uncompleted tasks
 		com.google.api.services.tasks.model.Tasks tasklist = taskService.tasks().list(container.getID())
-				.setDueMin(new DateTime(System.currentTimeMillis()).toStringRfc3339())
+				.setShowCompleted(false)
 				.execute();
 
 		// Get all tasks from tasklist

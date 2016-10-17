@@ -6,8 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 
-import com.google.api.client.util.DateTime;
-
 /**
  * Common utilities for the program.
  */
