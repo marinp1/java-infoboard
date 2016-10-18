@@ -2,8 +2,11 @@ package fi.patrikmarin.infoboard.utils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.HashMap;
 
 /**
@@ -116,23 +119,34 @@ public class Utils {
 	
 	// DATE TIME HELPERS
 	
-	public static LocalDateTime parseGoogleDate(String s) {
+	public static ZonedDateTime parseGoogleDate(String s) {
+		
 		DateTimeFormatter gDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		DateTimeFormatter gTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 		DateTimeFormatter gTimeFormat2 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 		
 		try {
 			if (s.contains(":")) {
+				
+				// The parsed zonedDateTime
+				ZonedDateTime result;
+				
+				// Total time offset from UTC
+				long timeOffset = Calendar.getInstance().getTimeZone().getRawOffset() + Calendar.getInstance().getTimeZone().getDSTSavings();
+				
+				// Some events don't have specified timezone
 				if (s.endsWith("Z")) {
-					return LocalDateTime.parse(s, gTimeFormat2);
+					result = ZonedDateTime.parse(s, gTimeFormat2.withZone(ZoneId.systemDefault())).plus(timeOffset, ChronoUnit.MILLIS);
 				} else {
 	            	int finalInd = s.lastIndexOf(":");
 	            	String s2 = s.substring(0, finalInd) + s.substring(finalInd + 1);
-					
-					return LocalDateTime.parse(s2, gTimeFormat);
+					result = ZonedDateTime.parse(s2, gTimeFormat);
 				}
+				
+				return result;
+				
 			} else {
-				return LocalDate.parse(s, gDateFormat).atStartOfDay();
+				return LocalDate.parse(s, gDateFormat).atStartOfDay().atZone(ZoneId.systemDefault());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -140,7 +154,7 @@ public class Utils {
 		}
 	}
 	
-	public static String dateTimeDifference(LocalDateTime start, LocalDateTime end) {
+	public static String dateTimeDifference(ZonedDateTime start, ZonedDateTime end) {
 		LocalDateTime tempDateTime = LocalDateTime.from(start);
 
 		long years = tempDateTime.until(end, ChronoUnit.YEARS);

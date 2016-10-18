@@ -1,6 +1,6 @@
 package fi.patrikmarin.infoboard.google;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 import com.google.api.client.util.DateTime;
 
@@ -15,8 +15,8 @@ public class GoogleCalendarEvent extends GoogleEvent {
 	private String location;
 	private String description;
 	private Color color;
-	private LocalDateTime startDateTime;
-	private LocalDateTime endDateTime;
+	private ZonedDateTime startDateTime;
+	private ZonedDateTime endDateTime;
 	private String length;
 	
 	/**
@@ -79,19 +79,19 @@ public class GoogleCalendarEvent extends GoogleEvent {
 		this.color = color;
 	}
 	
-	public LocalDateTime getStartDateTime() {
+	public ZonedDateTime getStartDateTime() {
 		return startDateTime;
 	}
 	
-	public void setStartDateTime(LocalDateTime startDateTime) {
+	public void setStartDateTime(ZonedDateTime startDateTime) {
 		this.startDateTime = startDateTime;
 	}
 	
-	public LocalDateTime getEndDateTime() {
+	public ZonedDateTime getEndDateTime() {
 		return endDateTime;
 	}
 	
-	public void setEndDateTime(LocalDateTime endDateTime) {
+	public void setEndDateTime(ZonedDateTime endDateTime) {
 		this.endDateTime = endDateTime;
 	}
 	

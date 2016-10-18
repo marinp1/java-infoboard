@@ -1,7 +1,7 @@
 package fi.patrikmarin.infoboard.google;
 
 import fi.patrikmarin.infoboard.utils.Utils;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 import com.google.api.client.util.DateTime;
 
@@ -12,7 +12,7 @@ public class GoogleTaskEvent extends GoogleEvent {
 
 	private String title;
 	private String notes;
-	private LocalDateTime due;
+	private ZonedDateTime due;
 	private Boolean completed;
 	
 	/**
@@ -53,11 +53,11 @@ public class GoogleTaskEvent extends GoogleEvent {
 		this.notes = notes;
 	}
 	
-	public LocalDateTime getDue() {
+	public ZonedDateTime getDue() {
 		return due;
 	}
 	
-	public void setDue(LocalDateTime due) {
+	public void setDue(ZonedDateTime due) {
 		this.due = due;
 	}
 	

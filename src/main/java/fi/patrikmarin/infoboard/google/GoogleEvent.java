@@ -1,6 +1,6 @@
 package fi.patrikmarin.infoboard.google;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 /**
  * Abstract class representing both
@@ -41,7 +41,7 @@ public abstract class GoogleEvent implements Comparable<GoogleEvent> {
 	 * The DateTime which is used for comparing objects.
 	 * Must be defined for all subclasses.
 	 */
-	protected LocalDateTime compareBy;
+	protected ZonedDateTime compareBy;
 	
 	/**
 	 * The comparison function for Google events.
