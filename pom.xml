@@ -4,7 +4,7 @@
 
   <groupId>fi.patrikmarin</groupId>
   <artifactId>infoboard</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.9-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>infoboard</name>
@@ -57,6 +57,14 @@
       </plugin>
   </plugins>
   </build>
+  
+  <distributionManagement>
+    <repository>
+      <id>deploy</id>
+      <name>Deployment repository</name>
+      <url>http://192.168.1.171:8080/archiva/repository/deploy</url>
+    </repository>
+  </distributionManagement>
 
   <dependencies>
     <dependency>
