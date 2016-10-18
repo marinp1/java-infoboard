@@ -60,9 +60,9 @@
   
   <distributionManagement>
     <repository>
-      <id>deploy</id>
-      <name>Deployment repository</name>
-      <url>http://192.168.1.171:8080/archiva/repository/deploy</url>
+      <id>snapshots</id>
+      <name>Snapshot repository</name>
+      <url>http://192.168.1.171:8080/nexus-2.14.0-01/content/repositories/snapshots/</url>
     </repository>
   </distributionManagement>
 
