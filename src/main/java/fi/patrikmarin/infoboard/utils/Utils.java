@@ -174,19 +174,25 @@ public class Utils {
 
 		long seconds = tempDateTime.until(end, ChronoUnit.SECONDS);
 		
-		if (minutes == 0 && hours == 0 && days == 1) {
+		String result = "";
+		
+		if (days == 1 && minutes == 0 && hours == 0) {
 			return "All day";
 		}
 		
-		if (hours == 0) {
-			return minutes + "min";
+		if (days > 0) {
+			result += days + "d ";
 		}
 		
-		if (minutes == 0) {
-			return hours + "h";
+		if (hours > 0) {
+			result += hours + "h ";
 		}
 		
-		return hours + "h " + minutes + "min";
+		if (minutes > 0) {
+			result += minutes + "min";
+		}
+		
+		return result.trim();
 	}
 	
 	// CUSTOM EXCEPTIONS
