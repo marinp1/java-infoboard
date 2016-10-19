@@ -143,7 +143,7 @@ public class InfoboardController {
 	private void setAdditionalInfoComponent() {
 		this.sunriseLabel.setText(App.sunrise.format(timeFormat));
 		this.sunsetLabel.setText(App.sunset.format(timeFormat));
-		this.innerTemperatureLabel.setText("N/A");
+		this.innerTemperatureLabel.setText(String.valueOf((int) Math.round(App.temperature)) + " °C");
 	}
 	
 	/**

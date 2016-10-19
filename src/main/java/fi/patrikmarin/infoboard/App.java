@@ -11,6 +11,7 @@ import fi.patrikmarin.infoboard.google.GoogleEvent;
 import fi.patrikmarin.infoboard.google.GoogleService;
 import fi.patrikmarin.infoboard.utils.LogLevel;
 import fi.patrikmarin.infoboard.utils.Logger;
+import fi.patrikmarin.infoboard.sensors.TemperatureSensor;
 import fi.patrikmarin.infoboard.weather.SolarCalculatorResult;
 import fi.patrikmarin.infoboard.weather.WeatherEvent;
 import fi.patrikmarin.infoboard.weather.WeatherService;
@@ -40,6 +41,8 @@ public class App extends Application {
     public static LocalDateTime sunrise;
     public static LocalDateTime sunset;
     
+    //=============================== SENSOR DATA =============================================================
+    public static double temperature = 0.0;
     
     
     /**
@@ -58,6 +61,19 @@ public class App extends Application {
     	sunset = WeatherService.getSunriseSet(SolarCalculatorResult.SUNSET);
     	weatherData = WeatherService.getWeatherForecast();
     	eventData = GoogleService.getGoogleEvents();
+    }
+    
+    /**
+     * Updates values from sensors.
+     */
+    private void updateSensorData() {
+    	try {
+    		double newTemperature = TemperatureSensor.updateValue();
+    		if (newTemperature != Double.MIN_VALUE) temperature = newTemperature;
+    	} catch (Exception e) {
+    		Logger.log(LogLevel.WARNING, "Couldn't read sensor data.");
+    	}
+	
     }
 
     /**
@@ -141,6 +157,7 @@ public class App extends Application {
                     javafx.application.Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
+                        	updateSensorData();
                         	// Every 5 minutes update data content and do a hard update on the view
                         	if (SECONDS_SINCE_LAST_UPDATE > DATA_UPDATE_INTERVAL) {
                         		updateData();
