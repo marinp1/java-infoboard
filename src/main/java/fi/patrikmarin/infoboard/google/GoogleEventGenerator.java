@@ -123,37 +123,40 @@ public class GoogleEventGenerator {
                 .setSingleEvents(true)
                 .execute();
         
-        List<Event> items = ev.getItems();
+        if (ev.getItems() != null) {
             
-        // Add each event to the list
-        for (Event event : items) {
-        	
-        	// If end time is not defined, use date
-            DateTime start = event.getStart().getDateTime();
-            if (start == null) {
-                start = event.getStart().getDate();
+            List<Event> items = ev.getItems();
+                
+            // Add each event to the list
+            for (Event event : items) {
+            	
+            	// If end time is not defined, use date
+                DateTime start = event.getStart().getDateTime();
+                if (start == null) {
+                    start = event.getStart().getDate();
+                }
+                
+                // If end time is not defined, use date
+                DateTime end = event.getEnd().getDateTime();
+                if (end == null) {
+                	end = event.getEnd().getDate();
+                }
+                
+                // Construct new event
+                GoogleCalendarEvent cEvent = new GoogleCalendarEvent(
+                		event.getId(),
+                		container,
+                		event.getSummary(),
+                		event.getLocation(),
+                		event.getDescription(),
+                		eventColorKeys.get(event.getColorId()),
+                		start,
+                		end
+                		);
+                
+                
+                googleCalendarEvents.add(cEvent);
             }
-            
-            // If end time is not defined, use date
-            DateTime end = event.getEnd().getDateTime();
-            if (end == null) {
-            	end = event.getEnd().getDate();
-            }
-            
-            // Construct new event
-            GoogleCalendarEvent cEvent = new GoogleCalendarEvent(
-            		event.getId(),
-            		container,
-            		event.getSummary(),
-            		event.getLocation(),
-            		event.getDescription(),
-            		eventColorKeys.get(event.getColorId()),
-            		start,
-            		end
-            		);
-            
-            
-            googleCalendarEvents.add(cEvent);
         }
 		
 		return googleCalendarEvents;
@@ -166,22 +169,27 @@ public class GoogleEventGenerator {
 		com.google.api.services.tasks.model.Tasks tasklist = taskService.tasks().list(container.getID())
 				.setShowCompleted(false)
 				.execute();
+		
+		// Some reason not having valid tasks means
+		// that getItems produces null even though the tasklist exists
+		if (tasklist.getItems() != null) {
 
-		// Get all tasks from tasklist
-    	for (Task task : tasklist.getItems()) {
-    	  
-    	  GoogleTaskEvent tEvent = new GoogleTaskEvent(
-    			  task.getId(),
-    			  container,
-    			  task.getTitle(),
-    			  (task.getNotes() == null) ? "" : task.getNotes(),
-    			  (task.getDue() == null) ? null : task.getDue(),
-    			  (task.getCompleted() == null) ? false : true
-    			  );
-    	  
-    	  googleTaskEvents.add(tEvent);
-    	  
-    	}
+			// Get all tasks from tasklist
+	    	for (Task task : tasklist.getItems()) {
+	    	  
+	    	  GoogleTaskEvent tEvent = new GoogleTaskEvent(
+	    			  task.getId(),
+	    			  container,
+	    			  task.getTitle(),
+	    			  (task.getNotes() == null) ? "" : task.getNotes(),
+	    			  (task.getDue() == null) ? null : task.getDue(),
+	    			  (task.getCompleted() == null) ? false : true
+	    			  );
+	    	  
+	    	  googleTaskEvents.add(tEvent);
+	    	  
+	    	}
+		}
     	
 		return googleTaskEvents;
 	}
