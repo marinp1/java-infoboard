@@ -9,6 +9,7 @@ import fi.patrikmarin.infoboard.App;
 import fi.patrikmarin.infoboard.Parameters;
 import fi.patrikmarin.infoboard.google.GoogleEvent;
 import fi.patrikmarin.infoboard.google.GoogleService;
+import fi.patrikmarin.infoboard.utils.Utils;
 import fi.patrikmarin.infoboard.weather.WeatherEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,6 +48,12 @@ public class InfoboardController {
 	private Label sunsetLabel;
 	@FXML
 	private Label innerTemperatureLabel;
+	@FXML
+	private Label pressureLabel;
+	@FXML
+	private Label windIconLabel;
+	@FXML
+	private Label windSpeedLabel;
 	
 	
 	//====================== GOOGLE BLOCK =======================================
@@ -144,6 +151,10 @@ public class InfoboardController {
 		this.sunriseLabel.setText(App.sunrise.format(timeFormat));
 		this.sunsetLabel.setText(App.sunset.format(timeFormat));
 		this.innerTemperatureLabel.setText(String.valueOf((int) Math.round(App.temperature)) + " °C");
+		this.pressureLabel.setText(app.getWeatherData().get(0).getPressure() + " hPa");
+		double windSpeed = app.getWeatherData().get(0).getWindSpeed();
+		this.windIconLabel.setText(Utils.beaufortIconMapper(windSpeed));
+		this.windSpeedLabel.setText(String.valueOf(windSpeed) + " m/s");
 	}
 	
 	/**

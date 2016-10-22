@@ -99,15 +99,18 @@ public class WeatherEventGenerator {
 										break;
 										
 					case "Pressure":	
+										weatherEvent.setPressure(Double.parseDouble(parameterValue));
 										break;
 										
 					case "WindDirection":
 										break;
 										
 					case "WindSpeedMS":
+										weatherEvent.setWindSpeed(Double.parseDouble(parameterValue));
 										break;
 										
 					case "Humidity":
+										weatherEvent.setHumidity(Double.parseDouble(parameterValue));
 										break;
 										
 					case "WeatherSymbol3":	weatherEvent.setIconContent(Double.parseDouble(parameterValue));

@@ -12,6 +12,9 @@ public class WeatherEvent {
 	private LocalDateTime time;
 	private Integer temperature;
 	private String iconContent;
+	private Double humidity;
+	private Double windSpeed;
+	private Double pressure;
 	
 	/**
 	 * Constructor for the class.
@@ -54,5 +57,29 @@ public class WeatherEvent {
 	
 	public void setIconContent(Double weatherIcon) {
 		this.iconContent = Utils.mapWeatherIDToContent(weatherIcon, (this.time.isAfter(App.sunset) || this.time.isBefore(App.sunrise)));
+	}
+	
+	public Double getHumidity() {
+		return humidity;
+	}
+	
+	public void setHumidity(Double humidity) {
+		this.humidity = humidity;
+	}
+	
+	public double getWindSpeed() {
+		return windSpeed;
+	}
+	
+	public void setWindSpeed(Double windSpeed) {
+		this.windSpeed = windSpeed;
+	}
+	
+	public double getPressure() {
+		return pressure;
+	}
+	
+	public void setPressure(Double pressure) {
+		this.pressure = pressure;
 	}
 }

@@ -117,6 +117,30 @@ public class Utils {
 		return weatherMap.get(weatherKey);
 	}
 	
+
+	/**
+	 * Gives appropriate icon for given wind speed,
+	 * mapped to the Beaufort scale.
+	 * 
+	 * @param windSpeed the wind speed in meters / second
+	 * @return the appropriate icon for the wind
+	 */
+	public static String beaufortIconMapper(double windSpeed) {
+		if (windSpeed < 0.3) return "\uf0b7";
+		if (windSpeed <= 1.5) return "\uf0b8";
+		if (windSpeed <= 3.3) return "\uf0b9";
+		if (windSpeed <= 5.5) return "\uf0ba";
+		if (windSpeed <= 7.9) return "\uf0bb";
+		if (windSpeed <= 10.7) return "\uf0bc";
+		if (windSpeed <= 13.8) return "\uf0bd";
+		if (windSpeed <= 17.9) return "\uf0be";
+		if (windSpeed <= 20.7) return "\uf0bf";
+		if (windSpeed <= 24.4) return "\uf0c0";
+		if (windSpeed <= 28.4) return "\uf0c1";
+		if (windSpeed <= 32.6) return "\uf0c2";
+		return "\uf0c3";
+	}
+	
 	// DATE TIME HELPERS
 	
 	public static ZonedDateTime parseGoogleDate(String s) {

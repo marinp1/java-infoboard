@@ -77,28 +77,50 @@
                                       </rowConstraints>
                                        <children>
                                           <Label styleClass="secondary-color" text="Additional data" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.valignment="BASELINE" />
-                                          <Label text="" GridPane.rowIndex="1">
-                                             <styleClass>
-                                                <String fx:value="datablock-key" />
-                                                <String fx:value="secondary-color" />
-                                             </styleClass>
-                                          </Label>
-                                          <Label fx:id="sunriseLabel" styleClass="main-color" text="23:59" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <Label text="" GridPane.rowIndex="3">
-                                             <styleClass>
+                                        
+                                          <Label text="" GridPane.rowIndex="1">
+                                          	<styleClass>
                                                 <String fx:value="datablock-key" />
                                                 <String fx:value="wi-fw" />
                                                 <String fx:value="secondary-color" />
-                                             </styleClass>
+                                           	</styleClass>
                                           </Label>
-                                          <Label fx:id="sunsetLabel" styleClass="main-color" text="23:59" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <Label text="" GridPane.rowIndex="2">
+                                          <Label fx:id="innerTemperatureLabel" styleClass="main-color" text="N/A" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          
+                                          <Label text="" GridPane.rowIndex="2">
                                              <styleClass>
                                                 <String fx:value="datablock-key" />
                                                 <String fx:value="secondary-color" />
                                              </styleClass>
                                           </Label>
-                                          <Label fx:id="innerTemperatureLabel" styleClass="main-color" text="N/A" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <Label fx:id="sunriseLabel" styleClass="main-color" text="23:59" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          
+                                          <Label text="" GridPane.rowIndex="3">
+                                             <styleClass>
+                                                <String fx:value="datablock-key" />
+                                                <String fx:value="secondary-color" />
+                                             </styleClass>
+                                          </Label>
+										  <Label fx:id="sunsetLabel" styleClass="main-color" text="23:59" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+										  
+  										  <Label text="" GridPane.rowIndex="4">
+                                          	<styleClass>
+                                                <String fx:value="datablock-key" />
+                                                <String fx:value="wi-fw" />
+                                                <String fx:value="secondary-color" />
+                                           	</styleClass>
+                                          </Label>
+                                          <Label fx:id="pressureLabel" styleClass="main-color" text="N/A" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          
+										  <Label fx:id="windIconLabel" text="" GridPane.rowIndex="5">
+                                          	<styleClass>
+                                                <String fx:value="datablock-key" />
+                                                <String fx:value="wi-fw" />
+                                                <String fx:value="secondary-color" />
+                                           	</styleClass>
+                                          </Label>
+                                          <Label fx:id="windSpeedLabel" styleClass="main-color" text="N/A" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          
                                        </children>
                                     </GridPane>
                                  </children>
