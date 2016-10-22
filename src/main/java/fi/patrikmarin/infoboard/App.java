@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.TreeMap;
 
 import fi.patrikmarin.infoboard.controller.InfoboardController;
@@ -11,6 +12,7 @@ import fi.patrikmarin.infoboard.google.GoogleEvent;
 import fi.patrikmarin.infoboard.google.GoogleService;
 import fi.patrikmarin.infoboard.utils.LogLevel;
 import fi.patrikmarin.infoboard.utils.Logger;
+import fi.patrikmarin.infoboard.utils.SettingsService;
 import fi.patrikmarin.infoboard.sensors.TemperatureSensor;
 import fi.patrikmarin.infoboard.weather.SolarCalculatorResult;
 import fi.patrikmarin.infoboard.weather.WeatherEvent;
@@ -41,17 +43,11 @@ public class App extends Application {
     public static LocalDateTime sunrise;
     public static LocalDateTime sunset;
     
+    // The calendar and event list ID that are not displayed
+	public static HashMap<String, Boolean> containerStatus = new HashMap<String, Boolean>();
+    
     //=============================== SENSOR DATA =============================================================
     public static double temperature = 0.0;
-    
-    
-    /**
-     * Constructor for the main application.
-     * TODO: Replace dummy data with service classes
-     */
-    public App() {
-    	updateData();
-    }
 
     /**
      * Updates application data with service classes.
@@ -107,8 +103,7 @@ public class App extends Application {
                 	try {
                     	updateThread.interrupt();
                     	updateThread.join();
-                    	//FIXME: Create settings service
-                		//SettingsService.saveSettings();
+                		SettingsService.saveSettings();
                     	Logger.log(LogLevel.INFO, "Program closed.");
                 	} catch (Exception e) {
                 		Logger.log(LogLevel.ERROR, "Couldn't close update thread.");
@@ -132,6 +127,9 @@ public class App extends Application {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
+            
+            SettingsService.readSettings();
+        	updateData();
             
             InfoboardController controller = loader.getController();
             controller.setApp(this);

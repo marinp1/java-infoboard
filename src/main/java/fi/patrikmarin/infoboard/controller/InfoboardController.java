@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import fi.patrikmarin.infoboard.App;
 import fi.patrikmarin.infoboard.Parameters;
 import fi.patrikmarin.infoboard.google.GoogleEvent;
-import fi.patrikmarin.infoboard.google.GoogleService;
 import fi.patrikmarin.infoboard.utils.Utils;
 import fi.patrikmarin.infoboard.weather.WeatherEvent;
 import javafx.fxml.FXML;
@@ -186,7 +185,7 @@ public class InfoboardController {
 				// Loop through all events for the day
 				for (GoogleEvent ge : app.getGoogleEventData().get(ld)) {
 					
-					if (!GoogleService.hiddenContainerIDs.contains(ge.getID())) {
+					if (ge.getParent().getEnabled()) {
 						// Get loader for the new google event
 				        FXMLLoader loader = new FXMLLoader();
 				        loader.setLocation(App.class.getResource("/fxml/GoogleEventBlock.fxml"));
@@ -211,8 +210,8 @@ public class InfoboardController {
 				// Add margins to box
 				VBox.setMargin(dayContainer, new Insets(0,0,20,0));
 	            
-				// Add the day container to the google component
-	            googleBox.getChildren().add(dayContainer);
+				// Add the day container to the google component, if there were any visible events for the day
+	            if (dayContainer.getChildren().size() > 1) googleBox.getChildren().add(dayContainer);
 	            
 			}
 			

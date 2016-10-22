@@ -18,6 +18,7 @@ import com.google.api.services.tasks.model.Task;
 import com.google.api.services.tasks.model.TaskList;
 import com.google.api.services.tasks.model.TaskLists;
 
+import fi.patrikmarin.infoboard.App;
 import javafx.scene.paint.Color;
 
 public class GoogleEventGenerator {
@@ -57,7 +58,14 @@ public class GoogleEventGenerator {
 
 				gcal.setColor(calendarColorKeys.get(calendarListEntry.getColorId()));
 				gcal.setID(calendarListEntry.getId());
-				gcal.setEnabled(GoogleService.hiddenContainerIDs.contains(gcal.getID()));
+				
+				// Check if the settings service contains the container
+				// If not, add it to the list
+				if (!App.containerStatus.containsKey(gcal.getID())) {
+					App.containerStatus.put(gcal.getID(), true);
+				}
+				gcal.setEnabled(App.containerStatus.get(gcal.getID()));
+				
 
 				googleEventContainers.add(gcal);
 			}
@@ -80,7 +88,14 @@ public class GoogleEventGenerator {
 
 				taskList.setID(tasklist.getId());
 				taskList.setName(tasklist.getTitle());
-				taskList.setEnabled(GoogleService.hiddenContainerIDs.contains(taskList.getID()));
+				
+				// Check if the settings service contains the container
+				// If not, add it to the list
+				if (!App.containerStatus.containsKey(taskList.getID())) {
+					App.containerStatus.put(taskList.getID(), true);
+				}
+				taskList.setEnabled(App.containerStatus.get(taskList.getID()));
+				
 				taskList.setColor(Color.BEIGE);
 
 				googleEventContainers.add(taskList);

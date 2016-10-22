@@ -35,8 +35,6 @@ public class GoogleService {
 	
 	private static GoogleAuthenticator AUTHENTICATOR;
 	
-	public static ArrayList<String> hiddenContainerIDs = new ArrayList<String>();
-	
 	private static ArrayList<GoogleEventContainer> googleEventContainers = new ArrayList<GoogleEventContainer>();
 	private static ArrayList<GoogleEvent> googleEvents = new ArrayList<GoogleEvent>();
 
@@ -114,5 +112,9 @@ public class GoogleService {
     	
     	
     	return googleEventMap;
+    }
+    
+    public static ArrayList<GoogleEventContainer> getGoogleEventContainers() {
+    	return googleEventContainers;
     }
 }
