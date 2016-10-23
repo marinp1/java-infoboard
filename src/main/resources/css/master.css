@@ -78,3 +78,14 @@
 .googleblock-time {
 	-fx-padding: 0 20px 0 0;
 }
+
+.settings-main {
+	-fx-background-color: rgba(0,0,0,0.80);
+	-fx-font-family: "Roboto Thin";
+	-fx-font-smoothing-type: gray;	
+	-fx-font-size: 36px;
+}
+
+.settings-text {
+	-fx-text-fill: rgba(255,255,255);
+}

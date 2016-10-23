@@ -179,5 +179,27 @@
             </HBox>
          </children>
       </AnchorPane>
+      <!--
+   	  <AnchorPane minHeight="1440" minWidth="900" styleClass="settings-main">
+   	  	<children>
+   	  		<VBox alignment="TOP_CENTER" prefWidth="800.0" spacing="70.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="200.0" HBox.hgrow="NEVER">
+				  <children>
+					  <Label text="Settings">
+	                  	<styleClass>
+	                        <String fx:value="main-color" />
+	                   	</styleClass>
+	                  </Label>
+                  	  <VBox spacing="20">
+                  	  		<Label text="Settings" styleClass="settings-text" />
+                  	  		<Label text="Settings" styleClass="settings-text" />
+                  	  		<Label text="Settings" styleClass="settings-text" />
+                  	  		<Label text="Settings" styleClass="settings-text" />
+                  	  		<Label text="Settings" styleClass="settings-text" />
+                  	  </VBox>
+                </children>
+   	  		</VBox>
+   	  	</children>
+   	  </AnchorPane>
+   	  -->
    </children>
 </StackPane>
