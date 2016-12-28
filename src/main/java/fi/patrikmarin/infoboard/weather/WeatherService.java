@@ -12,6 +12,7 @@ import java.net.URLConnection;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import fi.patrikmarin.infoboard.App;
 import fi.patrikmarin.infoboard.Keys;
 import fi.patrikmarin.infoboard.Parameters;
 import fi.patrikmarin.infoboard.utils.LogLevel;
@@ -30,7 +31,7 @@ public class WeatherService {
 	
 	private static String FMI_QUERY_ID = "fmi::forecast::hirlam::surface::point::simple";
 	
-	private static String SERVER_URL = "http://data.fmi.fi/fmi-apikey/" + Keys.FMI_API_KEY + "/wfs";
+	private static String SERVER_URL = "http://data.fmi.fi/fmi-apikey/" + App.API_KEYS.FMI_API_KEY + "/wfs";
 	
 	private static String FETCH_URL = SERVER_URL + "?request=getFeature&storedquery_id=" + FMI_QUERY_ID + "&place=" + Parameters.FORECAST_LOCATION;
 	

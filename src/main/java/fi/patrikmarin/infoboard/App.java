@@ -32,6 +32,8 @@ public class App extends Application {
     private StackPane root;
     private Thread updateThread;
     
+    public static Keys API_KEYS;
+    
     //============================= UPDATE VARIABLE ===========================================================
 	private Integer SECONDS_SINCE_LAST_UPDATE = 0;
 	private Integer VIEW_UPDATE_INTERVAL = 10;
@@ -95,6 +97,13 @@ public class App extends Application {
     public void start(Stage primaryStage) {    	
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Infoboard 2.0");
+        
+        try {
+        	API_KEYS = new Keys();
+        } catch (Exception e) {
+        	Logger.log(LogLevel.ERROR, e.getMessage());
+        	System.exit(10);
+        }
 
         initialiseProgram();
         

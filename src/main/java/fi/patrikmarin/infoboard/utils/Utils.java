@@ -246,4 +246,20 @@ public class Utils {
 			super(message);
 		}
 	}
+	
+	/**
+	 * Custom exception when API keys cannot be read
+	 */
+	public static class InvalidAPIKeyFileException extends Exception {
+
+		public InvalidAPIKeyFileException() {
+
+		}
+		
+		public InvalidAPIKeyFileException(String message)
+		{
+			super(message);
+		}
+	}
+	
 }

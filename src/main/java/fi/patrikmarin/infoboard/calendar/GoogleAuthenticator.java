@@ -6,7 +6,7 @@ import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.util.store.FileDataStoreFactory;
 
-import fi.patrikmarin.infoboard.Keys;
+import fi.patrikmarin.infoboard.App;
 import fi.patrikmarin.infoboard.utils.LogLevel;
 import fi.patrikmarin.infoboard.utils.Logger;
 
@@ -36,7 +36,7 @@ public class GoogleAuthenticator {
     		// Create Google authentication flow
             GoogleAuthorizationCodeFlow flow =
                     new GoogleAuthorizationCodeFlow.Builder(
-                    		CommonService.HTTP_TRANSPORT, CommonService.JSON_FACTORY, Keys.GOOGLE_CLIENT_ID, Keys.GOOGLE_CLIENT_SECRET, CommonService.SCOPES)
+                    		CommonService.HTTP_TRANSPORT, CommonService.JSON_FACTORY, App.API_KEYS.GOOGLE_CLIENT_ID, App.API_KEYS.GOOGLE_CLIENT_SECRET, CommonService.SCOPES)
     		        .setDataStoreFactory(DATA_STORE_FACTORY)
     		        .setAccessType("offline")
     		        .build();

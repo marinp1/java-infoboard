@@ -11,7 +11,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import fi.patrikmarin.infoboard.Keys;
+import fi.patrikmarin.infoboard.App;
 
 /**
  * Methods for retrieving data from the MeisterTask rest API.
@@ -19,12 +19,12 @@ import fi.patrikmarin.infoboard.Keys;
 public class MeisterTaskHelper {
 	
 	// Rest API endpoint for a list of projects
-	private static final String PROJECTS_URL = "https://www.meistertask.com/api/projects?access_token=" + Keys.MEISTERTASK_API_KEY;
+	private static final String PROJECTS_URL = "https://www.meistertask.com/api/projects?access_token=" + App.API_KEYS.MEISTERTASK_API_KEY;
 	
 	// Pieces for rest API endpoint for a list of tasks for a specific project.
 	// The final URL is TASKS_FOR_PROJECT_URL_START + [Project ID] + TASKS_FOR_PROJECT_URL_END
 	private static final String TASKS_FOR_PROJECT_URL_START = "https://www.meistertask.com/api/projects/";
-	private static final String TASKS_FOR_PROJECT_URL_END = "/tasks?access_token=" + Keys.MEISTERTASK_API_KEY;
+	private static final String TASKS_FOR_PROJECT_URL_END = "/tasks?access_token=" + App.API_KEYS.MEISTERTASK_API_KEY;
     /**
      * Get a list of MeisterTask projects.
      * @return a map of projects with IDs
