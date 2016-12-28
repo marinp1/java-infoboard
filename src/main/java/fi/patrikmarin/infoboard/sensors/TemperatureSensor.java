@@ -33,7 +33,7 @@ public class TemperatureSensor {
 		return status;
 	}
 	
-	// Initialize the probram on start
+	// Initialize the program on start
 	static {
 		init();
 	}

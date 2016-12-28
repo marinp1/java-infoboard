@@ -3,21 +3,21 @@ package fi.patrikmarin.infoboard.google;
 import javafx.scene.paint.Color;
 
 /**
- * Represents both a Google calendar and a Google task list.
+ * Represents all kinds of containers for events
  */
-public class GoogleEventContainer {
+public class CommonEventContainer {
 
 	private String ID;
 	private String name;
 	private Color color;
 	private Boolean enabled;
-	private GoogleContainerType type;
+	private CommonContainerType type;
 	
-	protected GoogleEventContainer(GoogleContainerType type) {
+	protected CommonEventContainer(CommonContainerType type) {
 		this.type = type;
 	}
 	
-	protected GoogleEventContainer(String ID, String name, Color color, Boolean enabled, GoogleContainerType type) {
+	protected CommonEventContainer(String ID, String name, Color color, Boolean enabled, CommonContainerType type) {
 		this.ID = ID;
 		this.name = name;
 		this.color = color;
@@ -57,11 +57,11 @@ public class GoogleEventContainer {
 		this.enabled = enabled;
 	}
 	
-	public GoogleContainerType getType() {
+	public CommonContainerType getType() {
 		return type;
 	}
 	
-	public void setType(GoogleContainerType type) {
+	public void setType(CommonContainerType type) {
 		this.type = type;
 	}
 }

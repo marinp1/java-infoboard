@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.TreeMap;
 
 import fi.patrikmarin.infoboard.controller.InfoboardController;
-import fi.patrikmarin.infoboard.google.GoogleEvent;
-import fi.patrikmarin.infoboard.google.GoogleService;
+import fi.patrikmarin.infoboard.google.CommonEvent;
+import fi.patrikmarin.infoboard.google.CommonService;
 import fi.patrikmarin.infoboard.utils.LogLevel;
 import fi.patrikmarin.infoboard.utils.Logger;
 import fi.patrikmarin.infoboard.utils.SettingsService;
@@ -39,7 +39,7 @@ public class App extends Application {
     
     //==================================== DATA ===============================================================
     private ArrayList<WeatherEvent> weatherData = new ArrayList<WeatherEvent>();
-    private TreeMap<LocalDate, ArrayList<GoogleEvent>> eventData = new TreeMap<LocalDate, ArrayList<GoogleEvent>>();
+    private TreeMap<LocalDate, ArrayList<CommonEvent>> eventData = new TreeMap<LocalDate, ArrayList<CommonEvent>>();
     public static LocalDateTime sunrise;
     public static LocalDateTime sunset;
     
@@ -56,7 +56,7 @@ public class App extends Application {
     	sunrise = WeatherService.getSunriseSet(SolarCalculatorResult.SUNRISE);
     	sunset = WeatherService.getSunriseSet(SolarCalculatorResult.SUNSET);
     	weatherData = WeatherService.getWeatherForecast();
-    	eventData = GoogleService.getGoogleEvents();
+    	eventData = CommonService.getGoogleEvents();
     }
     
     /**
@@ -84,7 +84,7 @@ public class App extends Application {
      * Returns gathered data from google calendar and google tasks.
      * @return
      */
-    public TreeMap<LocalDate, ArrayList<GoogleEvent>> getGoogleEventData() {
+    public TreeMap<LocalDate, ArrayList<CommonEvent>> getGoogleEventData() {
     	return eventData;
     }
     

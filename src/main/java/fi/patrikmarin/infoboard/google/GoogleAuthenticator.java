@@ -36,7 +36,7 @@ public class GoogleAuthenticator {
     		// Create Google authentication flow
             GoogleAuthorizationCodeFlow flow =
                     new GoogleAuthorizationCodeFlow.Builder(
-                    		GoogleService.HTTP_TRANSPORT, GoogleService.JSON_FACTORY, Keys.GOOGLE_CLIENT_ID, Keys.GOOGLE_CLIENT_SECRET, GoogleService.SCOPES)
+                    		CommonService.HTTP_TRANSPORT, CommonService.JSON_FACTORY, Keys.GOOGLE_CLIENT_ID, Keys.GOOGLE_CLIENT_SECRET, CommonService.SCOPES)
     		        .setDataStoreFactory(DATA_STORE_FACTORY)
     		        .setAccessType("offline")
     		        .build();

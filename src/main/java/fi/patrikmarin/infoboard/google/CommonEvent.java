@@ -7,16 +7,16 @@ import java.time.ZonedDateTime;
  * Google calendar events and tasks.
  * Sortable.
  */
-public abstract class GoogleEvent implements Comparable<GoogleEvent> {
+public abstract class CommonEvent implements Comparable<CommonEvent> {
 	
 	private String ID;
-	private GoogleEventContainer parent;
+	private CommonEventContainer parent;
 	
 	/** 
 	 * The constructor for the superclass.
 	 * @param ID the ID of the element.
 	 */
-	protected GoogleEvent(String ID, GoogleEventContainer parent) {
+	protected CommonEvent(String ID, CommonEventContainer parent) {
 		this.ID = ID;
 		this.parent = parent;
 	}
@@ -29,11 +29,11 @@ public abstract class GoogleEvent implements Comparable<GoogleEvent> {
 		ID = iD;
 	}
 	
-	public GoogleEventContainer getParent() {
+	public CommonEventContainer getParent() {
 		return parent;
 	}
 	
-	public void setParent(GoogleEventContainer parent) {
+	public void setParent(CommonEventContainer parent) {
 		this.parent = parent;
 	}
 	
@@ -52,15 +52,20 @@ public abstract class GoogleEvent implements Comparable<GoogleEvent> {
 	 * Tasks are always first
 	 */
 	@Override
-	public int compareTo(GoogleEvent ev) {
+	public int compareTo(CommonEvent ev) {
 		
-		if (this.parent.getType() == GoogleContainerType.CALENDAR 
-				&& ev.parent.getType() == GoogleContainerType.TASKLIST) {
+		if (this.parent.getType() == CommonContainerType.GOOGLE_CALENDAR 
+				&& ev.parent.getType() != CommonContainerType.GOOGLE_CALENDAR) {
 			return 1;
 		}
 		
-		if (this.parent.getType() == GoogleContainerType.TASKLIST 
-				&& ev.parent.getType() == GoogleContainerType.CALENDAR) {
+		if (this.parent.getType() == CommonContainerType.GOOGLE_TASKLIST
+				&& ev.parent.getType() == CommonContainerType.GOOGLE_CALENDAR) {
+			return -1;
+		}
+		
+		if (this.parent.getType() == CommonContainerType.MEISTERTASK_TASKLIST
+				&& ev.parent.getType() == CommonContainerType.GOOGLE_CALENDAR) {
 			return -1;
 		}
 		

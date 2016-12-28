@@ -8,7 +8,7 @@ import com.google.api.client.util.DateTime;
 /**
  * Represents a single Google task event.
  */
-public class GoogleTaskEvent extends GoogleEvent {
+public class GoogleTaskEvent extends CommonEvent {
 
 	private String title;
 	private String notes;
@@ -24,7 +24,7 @@ public class GoogleTaskEvent extends GoogleEvent {
 	 * @param due
 	 * @param completed
 	 */
-	public GoogleTaskEvent(String ID, GoogleEventContainer parent, String title, String notes, DateTime due,
+	public GoogleTaskEvent(String ID, CommonEventContainer parent, String title, String notes, DateTime due,
 			Boolean completed) {
 		
 		super(ID, parent);

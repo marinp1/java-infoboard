@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 import fi.patrikmarin.infoboard.App;
 import fi.patrikmarin.infoboard.Parameters;
-import fi.patrikmarin.infoboard.google.GoogleEvent;
+import fi.patrikmarin.infoboard.google.CommonEvent;
 import fi.patrikmarin.infoboard.utils.Utils;
 import fi.patrikmarin.infoboard.weather.WeatherEvent;
 import javafx.fxml.FXML;
@@ -183,7 +183,7 @@ public class InfoboardController {
 				dayContainer.getChildren().add(dayLabel);
 				
 				// Loop through all events for the day
-				for (GoogleEvent ge : app.getGoogleEventData().get(ld)) {
+				for (CommonEvent ge : app.getGoogleEventData().get(ld)) {
 					
 					if (ge.getParent().getEnabled()) {
 						// Get loader for the new google event

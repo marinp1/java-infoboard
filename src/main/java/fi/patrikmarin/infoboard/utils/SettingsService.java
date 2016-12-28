@@ -15,13 +15,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import fi.patrikmarin.infoboard.App;
-import fi.patrikmarin.infoboard.google.GoogleEventContainer;
-import fi.patrikmarin.infoboard.google.GoogleService;
+import fi.patrikmarin.infoboard.google.CommonEventContainer;
+import fi.patrikmarin.infoboard.google.CommonService;
 
 public class SettingsService {
 	static File SETTINGS_STORE = new java.io.File(System.getProperty("user.home"), ".infoboard/settings.json");
 	
-	static final String SETTINGS_GOOGLE_NAME = "GoogleSettings";
+	static final String SETTINGS_CALENDAR_NAME = "CalendarSettings";
 	
 	// Initialize the settings file if not found
 	static {
@@ -57,11 +57,11 @@ public class SettingsService {
         	
         	//=========== GOOGLE CONTAINERS ==========================
         	
-        	Boolean settingsObject = o.has(SETTINGS_GOOGLE_NAME);
+        	Boolean settingsObject = o.has(SETTINGS_CALENDAR_NAME);
         	
         	if (settingsObject) {
         		
-            	JsonArray containers = o.get(SETTINGS_GOOGLE_NAME).getAsJsonArray();
+            	JsonArray containers = o.get(SETTINGS_CALENDAR_NAME).getAsJsonArray();
             	
             	// Get values for each container
             	for (Integer i = 0; i < containers.size(); i++) {
@@ -95,15 +95,15 @@ public class SettingsService {
 
 			//============== GOOGLE CONTAINERS =============
 
-			Boolean calObj = o.has(SETTINGS_GOOGLE_NAME);
+			Boolean calObj = o.has(SETTINGS_CALENDAR_NAME);
 
-			if (calObj) o.remove(SETTINGS_GOOGLE_NAME);
+			if (calObj) o.remove(SETTINGS_CALENDAR_NAME);
 
 			JsonArray googleContainers = new JsonArray();
-			o.add(SETTINGS_GOOGLE_NAME, googleContainers);
+			o.add(SETTINGS_CALENDAR_NAME, googleContainers);
 
 			// Save values for each container
-			for (GoogleEventContainer gec : GoogleService.getGoogleEventContainers()) {
+			for (CommonEventContainer gec : CommonService.getCommonEventContainers()) {
 				JsonObject no = new JsonObject();
 				no.addProperty("ID", gec.getID());
 				no.addProperty("enabled", gec.getEnabled());

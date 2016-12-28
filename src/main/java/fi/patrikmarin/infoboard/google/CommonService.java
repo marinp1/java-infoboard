@@ -21,7 +21,7 @@ import fi.patrikmarin.infoboard.utils.Logger;
 /**
  * The main class for initiating Google API calls.
  */
-public class GoogleService {
+public class CommonService {
 	
 	protected static final String APPLICATION_NAME = "Infoboard";
 
@@ -35,15 +35,15 @@ public class GoogleService {
 	
 	private static GoogleAuthenticator AUTHENTICATOR;
 	
-	private static ArrayList<GoogleEventContainer> googleEventContainers = new ArrayList<GoogleEventContainer>();
-	private static ArrayList<GoogleEvent> googleEvents = new ArrayList<GoogleEvent>();
+	private static ArrayList<CommonEventContainer> eventContainers = new ArrayList<CommonEventContainer>();
+	private static ArrayList<CommonEvent> events = new ArrayList<CommonEvent>();
 
     /**
      * Build and return an authorized Calendar client service.
      * @return an authorized Calendar client service
      * @throws IOException
      */
-    private static com.google.api.services.calendar.Calendar getCalendarService() throws IOException {
+    private static com.google.api.services.calendar.Calendar getGoogleCalendarService() throws IOException {
     	
         try {
             HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
@@ -55,8 +55,8 @@ public class GoogleService {
     	
         Credential credential = AUTHENTICATOR.getCredentials();
         return new com.google.api.services.calendar.Calendar.Builder(
-        		GoogleService.HTTP_TRANSPORT, GoogleService.JSON_FACTORY, credential)
-                .setApplicationName(GoogleService.APPLICATION_NAME)
+        		CommonService.HTTP_TRANSPORT, CommonService.JSON_FACTORY, credential)
+                .setApplicationName(CommonService.APPLICATION_NAME)
                 .build();
     }
     
@@ -65,12 +65,22 @@ public class GoogleService {
      * @return an authorized Tasks client service
      * @throws IOException
      */
-    private static com.google.api.services.tasks.Tasks getTasksService() throws IOException {
+    private static com.google.api.services.tasks.Tasks getGoogleTasksService() throws IOException {
     	Credential credential = AUTHENTICATOR.getCredentials();
         return new com.google.api.services.tasks.Tasks.Builder(
-                GoogleService.HTTP_TRANSPORT, GoogleService.JSON_FACTORY, credential)
-                .setApplicationName(GoogleService.APPLICATION_NAME)
+                CommonService.HTTP_TRANSPORT, CommonService.JSON_FACTORY, credential)
+                .setApplicationName(CommonService.APPLICATION_NAME)
                 .build();
+    }
+    
+    /**
+     * Get a list of MeisterTask projects.
+     * @return a map of projects with IDs
+     */
+    public static TreeMap<String, String> getMeisterTaskProjects() {
+    	//TODO: Api request and parse
+    	// Maybe move into own file
+    	return null;
     }
     
     /**
@@ -78,29 +88,29 @@ public class GoogleService {
      * tasks and return combined and sorted hashmap of events.
      * @return
      */
-    public static TreeMap<LocalDate, ArrayList<GoogleEvent>> getGoogleEvents() {
-    	TreeMap<LocalDate, ArrayList<GoogleEvent>> googleEventMap = new TreeMap<LocalDate, ArrayList<GoogleEvent>>();
+    public static TreeMap<LocalDate, ArrayList<CommonEvent>> getGoogleEvents() {
+    	TreeMap<LocalDate, ArrayList<CommonEvent>> commonEventMap = new TreeMap<LocalDate, ArrayList<CommonEvent>>();
     	
     	Logger.log(LogLevel.INFO, "Trying to fetch Google events.");
         	
     	try {
-    		com.google.api.services.calendar.Calendar cService = getCalendarService();
-    		com.google.api.services.tasks.Tasks tService = getTasksService();
+    		com.google.api.services.calendar.Calendar gCalendarService = getGoogleCalendarService();
+    		com.google.api.services.tasks.Tasks gTasksService = getGoogleTasksService();
     		
     		// Get content from google servers
-    		googleEventContainers = GoogleEventGenerator.getGoogleEventContainers(cService, tService);
-    		googleEvents = GoogleEventGenerator.getGoogleEvents(googleEventContainers, cService, tService);
+    		eventContainers = CommonEventGenerator.getEventContainers(gCalendarService, gTasksService);
+    		events = CommonEventGenerator.getEvents(eventContainers, gCalendarService, gTasksService);
     		
     		// Populate date map from events
-    		for (GoogleEvent event : googleEvents) {
+    		for (CommonEvent event : events) {
     			
     			LocalDate ld = event.compareBy.toLocalDate();
     			
-    			if (googleEventMap.containsKey(ld)) {
-    				googleEventMap.get(ld).add(event);
+    			if (commonEventMap.containsKey(ld)) {
+    				commonEventMap.get(ld).add(event);
     			} else {
-    				googleEventMap.put(ld, new ArrayList<GoogleEvent>());
-    				googleEventMap.get(ld).add(event);
+    				commonEventMap.put(ld, new ArrayList<CommonEvent>());
+    				commonEventMap.get(ld).add(event);
     			}
     		}
     		
@@ -111,10 +121,10 @@ public class GoogleService {
     	}
     	
     	
-    	return googleEventMap;
+    	return commonEventMap;
     }
     
-    public static ArrayList<GoogleEventContainer> getGoogleEventContainers() {
-    	return googleEventContainers;
+    public static ArrayList<CommonEventContainer> getCommonEventContainers() {
+    	return eventContainers;
     }
 }

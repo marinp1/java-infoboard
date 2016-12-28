@@ -2,9 +2,9 @@ package fi.patrikmarin.infoboard.controller;
 
 import static fi.patrikmarin.infoboard.utils.Utils.*;
 
+import fi.patrikmarin.infoboard.google.CommonContainerType;
+import fi.patrikmarin.infoboard.google.CommonEvent;
 import fi.patrikmarin.infoboard.google.GoogleCalendarEvent;
-import fi.patrikmarin.infoboard.google.GoogleContainerType;
-import fi.patrikmarin.infoboard.google.GoogleEvent;
 import fi.patrikmarin.infoboard.google.GoogleTaskEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -24,9 +24,9 @@ public class GoogleEventController {
 	private Label googleEventInfoLabel;
 	
 	//TODO: The label names are completely wrong
-	public void addEvent(GoogleEvent ge) {
+	public void addEvent(CommonEvent ge) {
 		
-		if (ge.getParent().getType() == GoogleContainerType.CALENDAR) {
+		if (ge.getParent().getType() == CommonContainerType.GOOGLE_CALENDAR) {
 			GoogleCalendarEvent gce = (GoogleCalendarEvent) ge;
 			
 			String location = gce.getLocation();
@@ -48,13 +48,17 @@ public class GoogleEventController {
 			googleEventTitleLabel.setText(titleLabel);
 			
 			
-		} else {
+		} else if (ge.getParent().getType() == CommonContainerType.GOOGLE_TASKLIST) {
 			GoogleTaskEvent gte = (GoogleTaskEvent) ge;
 
 			// Dont display task due time
 			googleEventTimeLabel.setText(gte.getTitle());
 			googleEventTitleLabel.setText(gte.getNotes());
 			googleEventInfoLabel.setText("");
+			
+		} else if (ge.getParent().getType() == CommonContainerType.MEISTERTASK_TASKLIST) {
+			
+			
 		}
 
 	}
