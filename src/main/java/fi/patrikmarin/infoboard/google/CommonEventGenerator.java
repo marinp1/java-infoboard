@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.Calendar;
@@ -19,6 +20,8 @@ import com.google.api.services.tasks.model.TaskList;
 import com.google.api.services.tasks.model.TaskLists;
 
 import fi.patrikmarin.infoboard.App;
+import fi.patrikmarin.infoboard.utils.LogLevel;
+import fi.patrikmarin.infoboard.utils.Logger;
 import javafx.scene.paint.Color;
 
 public class CommonEventGenerator {
@@ -101,6 +104,25 @@ public class CommonEventGenerator {
 		
 		// =================== Get MeisterTask projects ====================================
 		
+		TreeMap<String, String> meisterProjects = MeisterTaskHelper.getMeisterTaskProjects();
+		
+		for (String projectID : meisterProjects.keySet()) {
+			
+			CommonEventContainer meisterProject = new CommonEventContainer(CommonContainerType.MEISTERTASK_TASKLIST);
+			
+			meisterProject.setID(projectID);
+			meisterProject.setName(meisterProjects.get(projectID));
+
+			if (!App.containerStatus.containsKey(projectID)) {
+				App.containerStatus.put(projectID, true);
+			}
+			
+			meisterProject.setEnabled(App.containerStatus.get(projectID));
+			
+			meisterProject.setColor(Color.BLUE);
+			
+			eventContainers.add(meisterProject);
+		}
 		
 		return eventContainers;
 	}
@@ -120,11 +142,9 @@ public class CommonEventGenerator {
 					events.add(tEvent);
 				}
 			} else if (eventContainer.getType() == CommonContainerType.MEISTERTASK_TASKLIST) {
-				// TODO:
-				// Loops containers, make
-				// get api requests for each one
-				// OR
-				// Loops trough all tasks and handle appropriately
+				for (MeisterTaskEvent mEvent : MeisterTaskHelper.getMeisterTasksByProject(eventContainer)) {
+					events.add(mEvent);
+				}
 			}
 		}
 		

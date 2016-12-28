@@ -74,21 +74,11 @@ public class CommonService {
     }
     
     /**
-     * Get a list of MeisterTask projects.
-     * @return a map of projects with IDs
-     */
-    public static TreeMap<String, String> getMeisterTaskProjects() {
-    	//TODO: Api request and parse
-    	// Maybe move into own file
-    	return null;
-    }
-    
-    /**
      * Call Google element generation for calendar events and
      * tasks and return combined and sorted hashmap of events.
      * @return
      */
-    public static TreeMap<LocalDate, ArrayList<CommonEvent>> getGoogleEvents() {
+    public static TreeMap<LocalDate, ArrayList<CommonEvent>> getCommonEvents() {
     	TreeMap<LocalDate, ArrayList<CommonEvent>> commonEventMap = new TreeMap<LocalDate, ArrayList<CommonEvent>>();
     	
     	Logger.log(LogLevel.INFO, "Trying to fetch Google events.");

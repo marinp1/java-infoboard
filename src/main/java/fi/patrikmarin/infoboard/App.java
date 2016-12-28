@@ -56,7 +56,7 @@ public class App extends Application {
     	sunrise = WeatherService.getSunriseSet(SolarCalculatorResult.SUNRISE);
     	sunset = WeatherService.getSunriseSet(SolarCalculatorResult.SUNSET);
     	weatherData = WeatherService.getWeatherForecast();
-    	eventData = CommonService.getGoogleEvents();
+    	eventData = CommonService.getCommonEvents();
     }
     
     /**

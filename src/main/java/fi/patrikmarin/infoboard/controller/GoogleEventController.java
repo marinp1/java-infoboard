@@ -6,6 +6,7 @@ import fi.patrikmarin.infoboard.google.CommonContainerType;
 import fi.patrikmarin.infoboard.google.CommonEvent;
 import fi.patrikmarin.infoboard.google.GoogleCalendarEvent;
 import fi.patrikmarin.infoboard.google.GoogleTaskEvent;
+import fi.patrikmarin.infoboard.google.MeisterTaskEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -58,6 +59,12 @@ public class GoogleEventController {
 			
 		} else if (ge.getParent().getType() == CommonContainerType.MEISTERTASK_TASKLIST) {
 			
+			MeisterTaskEvent me = (MeisterTaskEvent) ge;
+			
+			// Dont display task due time
+			googleEventTimeLabel.setText(me.getTitle());
+			googleEventTitleLabel.setText(me.getNotes());
+			googleEventInfoLabel.setText("");
 			
 		}
 
