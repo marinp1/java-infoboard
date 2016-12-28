@@ -3,25 +3,17 @@ package fi.patrikmarin.infoboard.calendar;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
-import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.CalendarList;
 import com.google.api.services.calendar.model.CalendarListEntry;
-import com.google.api.services.calendar.model.ColorDefinition;
-import com.google.api.services.calendar.model.Colors;
-import com.google.api.services.calendar.model.Event;
 import com.google.api.services.tasks.Tasks;
-import com.google.api.services.tasks.model.Task;
 import com.google.api.services.tasks.model.TaskList;
 import com.google.api.services.tasks.model.TaskLists;
 
 import fi.patrikmarin.infoboard.App;
-import fi.patrikmarin.infoboard.utils.LogLevel;
-import fi.patrikmarin.infoboard.utils.Logger;
 import javafx.scene.paint.Color;
 
 public class CommonEventGenerator {
