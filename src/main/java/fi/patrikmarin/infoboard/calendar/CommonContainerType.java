@@ -1,4 +1,4 @@
-package fi.patrikmarin.infoboard.google;
+package fi.patrikmarin.infoboard.calendar;
 
 /**
  * Enumeration for differentiating Google event containers.

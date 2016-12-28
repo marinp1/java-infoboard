@@ -1,4 +1,4 @@
-package fi.patrikmarin.infoboard.google;
+package fi.patrikmarin.infoboard.calendar;
 
 import javafx.scene.paint.Color;
 

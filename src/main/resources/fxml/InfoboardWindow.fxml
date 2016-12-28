@@ -127,7 +127,7 @@
                               </VBox>
                            </children>
                         </HBox>
-                        <VBox fx:id="googleBox" prefWidth="100.0" styleClass="googleblock">
+                        <VBox fx:id="calendarBox" prefWidth="100.0" styleClass="calendarblock">
                            <children>
                               <VBox prefWidth="100.0" spacing="20.0">
                                  <children>
@@ -144,20 +144,20 @@
                                        <children>
                                           <Label text="18:00" GridPane.hgrow="NEVER">
                                              <styleClass>
-                                                <String fx:value="googleblock-main" />
-                                                <String fx:value="googleblock-time" />
+                                                <String fx:value="calendarblock-main" />
+                                                <String fx:value="calendarblock-time" />
                                                 <String fx:value="main-color" />
                                              </styleClass>
                                           </Label>
                                           <Label text="2h- Espoonlahden TN 2" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                              <styleClass>
                                                 <String fx:value="secondary-color" />
-                                                <String fx:value="googleblock-info" />
+                                                <String fx:value="calendarblock-info" />
                                              </styleClass>
                                           </Label>
                                           <Label text="EPS Rock Reenit 21-22" GridPane.columnIndex="1">
                                              <styleClass>
-                                                <String fx:value="googleblock-main" />
+                                                <String fx:value="calendarblock-main" />
                                                 <String fx:value="main-color" />
                                              </styleClass>
                                           </Label>

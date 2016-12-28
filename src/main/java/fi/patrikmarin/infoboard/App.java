@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
 
+import fi.patrikmarin.infoboard.calendar.CommonEvent;
+import fi.patrikmarin.infoboard.calendar.CommonService;
 import fi.patrikmarin.infoboard.controller.InfoboardController;
-import fi.patrikmarin.infoboard.google.CommonEvent;
-import fi.patrikmarin.infoboard.google.CommonService;
 import fi.patrikmarin.infoboard.utils.LogLevel;
 import fi.patrikmarin.infoboard.utils.Logger;
 import fi.patrikmarin.infoboard.utils.SettingsService;
@@ -84,7 +84,7 @@ public class App extends Application {
      * Returns gathered data from google calendar and google tasks.
      * @return
      */
-    public TreeMap<LocalDate, ArrayList<CommonEvent>> getGoogleEventData() {
+    public TreeMap<LocalDate, ArrayList<CommonEvent>> getCalendarEventData() {
     	return eventData;
     }
     

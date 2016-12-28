@@ -1,4 +1,4 @@
-package fi.patrikmarin.infoboard.google;
+package fi.patrikmarin.infoboard.calendar;
 
 import fi.patrikmarin.infoboard.utils.Utils;
 import java.time.ZonedDateTime;

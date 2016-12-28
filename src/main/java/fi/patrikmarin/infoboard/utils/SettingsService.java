@@ -15,8 +15,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import fi.patrikmarin.infoboard.App;
-import fi.patrikmarin.infoboard.google.CommonEventContainer;
-import fi.patrikmarin.infoboard.google.CommonService;
+import fi.patrikmarin.infoboard.calendar.CommonEventContainer;
+import fi.patrikmarin.infoboard.calendar.CommonService;
 
 public class SettingsService {
 	static File SETTINGS_STORE = new java.io.File(System.getProperty("user.home"), ".infoboard/settings.json");

@@ -1,4 +1,4 @@
-package fi.patrikmarin.infoboard.google;
+package fi.patrikmarin.infoboard.calendar;
 
 import java.io.IOException;
 import java.time.LocalDate;
