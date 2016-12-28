@@ -19,19 +19,21 @@ import javafx.scene.paint.Color;
 public class CommonEventGenerator {
 
 	/**
-	 * Gets google event containers from Google.
-	 * @param calendarService
-	 * @param taskService
+	 * Gets  event containers from Google and MeisterTask.
+	 * @param gCalendarService
+	 * @param gTaskService
 	 * @return
 	 * @throws IOException
 	 */
 	protected static ArrayList<CommonEventContainer> getEventContainers(Calendar gCalendarService, Tasks gTaskService) throws Exception {
+		
 		// Update color hashmaps
 		GoogleHelper.updateCalendarColorKeys(gCalendarService);
 
 		ArrayList<CommonEventContainer> eventContainers = new ArrayList<CommonEventContainer>();
 
 		//================== Get calendars ==========================================
+		
 		String pageToken = null;
 
 		do {
@@ -67,6 +69,7 @@ public class CommonEventGenerator {
 		} while(pageToken != null);
 
 		// ==================== Get tasklists ===========================================
+		
 		TaskLists taskQuery = gTaskService.tasklists().list()
 				.setMaxResults(Long.valueOf(10))
 				.execute();
@@ -119,7 +122,15 @@ public class CommonEventGenerator {
 		return eventContainers;
 	}
 	
-	
+	/**
+	 * Gets events for different types of containers from different sources.
+	 * 
+	 * @param eventContainers
+	 * @param gCalendarService
+	 * @param gTaskService
+	 * @return
+	 * @throws Exception
+	 */
 	protected static ArrayList<CommonEvent> getEvents(ArrayList<CommonEventContainer> eventContainers, Calendar gCalendarService, Tasks gTaskService) throws Exception {
 		
 		ArrayList<CommonEvent> events = new ArrayList<CommonEvent>();

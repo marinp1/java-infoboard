@@ -1,7 +1,7 @@
 package fi.patrikmarin.infoboard.calendar;
 
 /**
- * Enumeration for differentiating Google event containers.
+ * Enumeration for differentiating caledar and task event containers.
  */
 public enum CommonContainerType {
 	GOOGLE_CALENDAR,

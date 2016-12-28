@@ -4,7 +4,7 @@ import java.time.ZonedDateTime;
 
 /**
  * Abstract class representing both
- * Google calendar events and tasks.
+ * calendar events and tasks.
  * Sortable.
  */
 public abstract class CommonEvent implements Comparable<CommonEvent> {
@@ -44,7 +44,7 @@ public abstract class CommonEvent implements Comparable<CommonEvent> {
 	protected ZonedDateTime compareBy;
 	
 	/**
-	 * The comparison function for Google events.
+	 * The comparison function for Calendar events.
 	 * The comparison parameter is the start time of the event for
 	 * calendar events and the deadline for tasks.
 	 * 

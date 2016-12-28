@@ -74,7 +74,7 @@ public class CommonService {
     }
     
     /**
-     * Call Google element generation for calendar events and
+     * Call element generation for calendar events and
      * tasks and return combined and sorted hashmap of events.
      * @return
      */
@@ -84,6 +84,8 @@ public class CommonService {
     	Logger.log(LogLevel.INFO, "Trying to fetch calendar events and tasks.");
         	
     	try {
+    		
+    		// Get Google service references
     		com.google.api.services.calendar.Calendar gCalendarService = getGoogleCalendarService();
     		com.google.api.services.tasks.Tasks gTasksService = getGoogleTasksService();
     		

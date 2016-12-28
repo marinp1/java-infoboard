@@ -13,6 +13,14 @@ public class MeisterTaskEvent extends CommonEvent {
 	private String notes;
 	private ZonedDateTime due;
 	
+	/**
+	 * Constructor for MeisterTask task
+	 * @param ID
+	 * @param parent
+	 * @param title
+	 * @param notes
+	 * @param ts
+	 */
 	protected MeisterTaskEvent(String ID, CommonEventContainer parent, String title, String notes, String ts) {
 		super(ID, parent);
 		
