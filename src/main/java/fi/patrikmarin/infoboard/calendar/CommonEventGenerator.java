@@ -33,7 +33,7 @@ public class CommonEventGenerator {
 	 * @return
 	 * @throws IOException
 	 */
-	protected static ArrayList<CommonEventContainer> getEventContainers(Calendar gCalendarService, Tasks gTaskService) throws IOException {
+	protected static ArrayList<CommonEventContainer> getEventContainers(Calendar gCalendarService, Tasks gTaskService) throws Exception {
 		// Update color hashmaps
 		GoogleHelper.updateCalendarColorKeys(gCalendarService);
 
@@ -128,7 +128,7 @@ public class CommonEventGenerator {
 	}
 	
 	
-	protected static ArrayList<CommonEvent> getEvents(ArrayList<CommonEventContainer> eventContainers, Calendar gCalendarService, Tasks gTaskService) throws IOException {
+	protected static ArrayList<CommonEvent> getEvents(ArrayList<CommonEventContainer> eventContainers, Calendar gCalendarService, Tasks gTaskService) throws Exception {
 		
 		ArrayList<CommonEvent> events = new ArrayList<CommonEvent>();
 		

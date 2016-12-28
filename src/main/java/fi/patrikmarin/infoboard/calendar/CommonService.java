@@ -81,7 +81,7 @@ public class CommonService {
     public static TreeMap<LocalDate, ArrayList<CommonEvent>> getCommonEvents() {
     	TreeMap<LocalDate, ArrayList<CommonEvent>> commonEventMap = new TreeMap<LocalDate, ArrayList<CommonEvent>>();
     	
-    	Logger.log(LogLevel.INFO, "Trying to fetch Google events.");
+    	Logger.log(LogLevel.INFO, "Trying to fetch calendar events and tasks.");
         	
     	try {
     		com.google.api.services.calendar.Calendar gCalendarService = getGoogleCalendarService();
@@ -104,10 +104,11 @@ public class CommonService {
     			}
     		}
     		
-    		Logger.log(LogLevel.INFO, "Tasks and calendar events fetched successfully.");
+    		Logger.log(LogLevel.INFO, "Calendar events and tasks fetched successfully.");
     		
     	} catch (Exception e) {
-    		Logger.log(LogLevel.ERROR, "Error with Google events: " + e.getMessage());
+    		Logger.log(LogLevel.ERROR, "Error with calendar events or tasks: " + e.getMessage());
+    		e.printStackTrace();
     	}
     	
     	

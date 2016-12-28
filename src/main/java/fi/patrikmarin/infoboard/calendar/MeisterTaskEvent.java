@@ -4,6 +4,9 @@ import java.time.ZonedDateTime;
 
 import fi.patrikmarin.infoboard.utils.Utils;
 
+/**
+ * Represents a MeisterTask task component.
+ */
 public class MeisterTaskEvent extends CommonEvent {
 
 	private String title;
