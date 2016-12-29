@@ -2,10 +2,14 @@ package fi.patrikmarin.infoboard;
 
 /**
  * Adjustable program parameters.
+ * TODO: Load/save option
  */
 public class Parameters {
 	//====================== WEATHER PARAMETERS =====================================
-	public static String FORECAST_LOCATION = "Otaniemi,Espoo";
+	
+	// Forecast location coordinates
+	public static Double FORECAST_LOCATION_LAT = 60.190145;
+	public static Double FORECAST_LOCATION_LNG = 24.8351184;
 	// How many forecast elements are displayed
 	public static Integer FORECAST_COUNT = 5;
 	// Hours between displayed forecasts (minimum is 1)

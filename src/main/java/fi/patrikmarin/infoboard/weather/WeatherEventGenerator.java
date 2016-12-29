@@ -77,7 +77,7 @@ public class WeatherEventGenerator {
 			NodeList elements = (NodeList) elementExpr.evaluate(doc, XPathConstants.NODESET);
 			
 			LocalDateTime dateTime = LocalDateTime.parse(time, Utils.fmiDateTimeFormat);
-			dateTime = dateTime.plusSeconds((TimeZone.getDefault().getRawOffset() + TimeZone.getDefault().getDSTSavings()) / 1000);
+			dateTime = dateTime.plusSeconds(TimeZone.getDefault().getRawOffset() / 1000);
 			
 			WeatherEvent weatherEvent = new WeatherEvent(dateTime);
 			
@@ -93,7 +93,6 @@ public class WeatherEventGenerator {
 				String parameterValue = (String) xpath.compile(parameterValueXPath).evaluate(elements.item(i), XPathConstants.STRING);
 				
 				// Handle different parameters differently
-				// TODO: Add pressure, wind and humidity?
 				switch(parameterName) {
 					case "Temperature": weatherEvent.setTemperature(Double.parseDouble(parameterValue));
 										break;
