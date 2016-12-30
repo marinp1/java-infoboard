@@ -3,6 +3,7 @@ package fi.patrikmarin.infoboard.utils;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -178,6 +179,15 @@ public class Utils {
 		}
 	}
 	
+	public static ZonedDateTime timestampToZonedDateTime(String ts) {
+		
+		String[] timestamp = ts.split("\\.");
+		
+		LocalDateTime dateStamp = LocalDateTime.ofEpochSecond(Long.parseLong(timestamp[0]) / 1000, 0, ZoneOffset.UTC);
+		
+		return dateStamp.atZone(ZoneId.systemDefault());
+	}
+	
 	public static String dateTimeDifference(ZonedDateTime start, ZonedDateTime end) {
 		LocalDateTime tempDateTime = LocalDateTime.from(start);
 
@@ -236,4 +246,20 @@ public class Utils {
 			super(message);
 		}
 	}
+	
+	/**
+	 * Custom exception when API keys cannot be read
+	 */
+	public static class InvalidAPIKeyFileException extends Exception {
+
+		public InvalidAPIKeyFileException() {
+
+		}
+		
+		public InvalidAPIKeyFileException(String message)
+		{
+			super(message);
+		}
+	}
+	
 }

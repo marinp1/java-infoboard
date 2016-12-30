@@ -1,4 +1,4 @@
-package fi.patrikmarin.infoboard.google;
+package fi.patrikmarin.infoboard.calendar;
 
 import java.time.ZonedDateTime;
 
@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 /**
  * Represents a single Google calendar event.
  */
-public class GoogleCalendarEvent extends GoogleEvent {
+public class GoogleCalendarEvent extends CommonEvent {
 	private String summary;
 	private String location;
 	private String description;
@@ -30,7 +30,7 @@ public class GoogleCalendarEvent extends GoogleEvent {
 	 * @param startDateTime
 	 * @param endDateTime
 	 */
-	public GoogleCalendarEvent(String ID, GoogleEventContainer parent, String summary, String location, String description, Color color,
+	public GoogleCalendarEvent(String ID, CommonEventContainer parent, String summary, String location, String description, Color color,
 			DateTime startDateTime, DateTime endDateTime) {
 		
 		super(ID, parent);

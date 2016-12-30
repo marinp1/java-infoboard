@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
 
+import fi.patrikmarin.infoboard.calendar.CommonEvent;
+import fi.patrikmarin.infoboard.calendar.CommonService;
 import fi.patrikmarin.infoboard.controller.InfoboardController;
-import fi.patrikmarin.infoboard.google.GoogleEvent;
-import fi.patrikmarin.infoboard.google.GoogleService;
 import fi.patrikmarin.infoboard.utils.LogLevel;
 import fi.patrikmarin.infoboard.utils.Logger;
 import fi.patrikmarin.infoboard.utils.SettingsService;
@@ -32,6 +32,8 @@ public class App extends Application {
     private StackPane root;
     private Thread updateThread;
     
+    public static Keys API_KEYS;
+    
     //============================= UPDATE VARIABLE ===========================================================
 	private Integer SECONDS_SINCE_LAST_UPDATE = 0;
 	private Integer VIEW_UPDATE_INTERVAL = 10;
@@ -39,7 +41,7 @@ public class App extends Application {
     
     //==================================== DATA ===============================================================
     private ArrayList<WeatherEvent> weatherData = new ArrayList<WeatherEvent>();
-    private TreeMap<LocalDate, ArrayList<GoogleEvent>> eventData = new TreeMap<LocalDate, ArrayList<GoogleEvent>>();
+    private TreeMap<LocalDate, ArrayList<CommonEvent>> eventData = new TreeMap<LocalDate, ArrayList<CommonEvent>>();
     public static LocalDateTime sunrise;
     public static LocalDateTime sunset;
     
@@ -56,7 +58,7 @@ public class App extends Application {
     	sunrise = WeatherService.getSunriseSet(SolarCalculatorResult.SUNRISE);
     	sunset = WeatherService.getSunriseSet(SolarCalculatorResult.SUNSET);
     	weatherData = WeatherService.getWeatherForecast();
-    	eventData = GoogleService.getGoogleEvents();
+    	eventData = CommonService.getCommonEvents();
     }
     
     /**
@@ -84,7 +86,7 @@ public class App extends Application {
      * Returns gathered data from google calendar and google tasks.
      * @return
      */
-    public TreeMap<LocalDate, ArrayList<GoogleEvent>> getGoogleEventData() {
+    public TreeMap<LocalDate, ArrayList<CommonEvent>> getCalendarEventData() {
     	return eventData;
     }
     
@@ -95,6 +97,13 @@ public class App extends Application {
     public void start(Stage primaryStage) {    	
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Infoboard 2.0");
+        
+        try {
+        	API_KEYS = new Keys();
+        } catch (Exception e) {
+        	Logger.log(LogLevel.ERROR, e.getMessage());
+        	System.exit(10);
+        }
 
         initialiseProgram();
         

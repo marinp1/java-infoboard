@@ -12,6 +12,7 @@ import java.net.URLConnection;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import fi.patrikmarin.infoboard.App;
 import fi.patrikmarin.infoboard.Keys;
 import fi.patrikmarin.infoboard.Parameters;
 import fi.patrikmarin.infoboard.utils.LogLevel;
@@ -24,15 +25,11 @@ public class WeatherService {
 	
 	private static String WEATHER_DATA_FILELOCATION = WEATHER_DATA_LOCATION + File.separator + WEATHER_DATA_FILENAME;
 	
-	// TODO Read the location from FMI result
-	private static Double LOCATION_LAT = 60.18395;
-	private static Double LOCATION_LNG = 24.82786;
-	
 	private static String FMI_QUERY_ID = "fmi::forecast::hirlam::surface::point::simple";
 	
-	private static String SERVER_URL = "http://data.fmi.fi/fmi-apikey/" + Keys.FMI_API_KEY + "/wfs";
+	private static String SERVER_URL = "http://data.fmi.fi/fmi-apikey/" + App.API_KEYS.FMI_API_KEY + "/wfs";
 	
-	private static String FETCH_URL = SERVER_URL + "?request=getFeature&storedquery_id=" + FMI_QUERY_ID + "&place=" + Parameters.FORECAST_LOCATION;
+	private static String FETCH_URL = SERVER_URL + "?request=getFeature&storedquery_id=" + FMI_QUERY_ID + "&latlon=" + Parameters.FORECAST_LOCATION_LAT + "," + Parameters.FORECAST_LOCATION_LNG;
 	
 	/**
 	 * Gets latest weather forecast for location using
@@ -43,7 +40,7 @@ public class WeatherService {
 	 */
 	public static ArrayList<WeatherEvent> getWeatherForecast() {
 		
-		Logger.log(LogLevel.INFO, "Trying to get data at http://data.fmi.fi with query " + FMI_QUERY_ID + " for " + Parameters.FORECAST_LOCATION);
+		Logger.log(LogLevel.INFO, "Trying to get data at http://data.fmi.fi with query " + FMI_QUERY_ID + " for " + Parameters.FORECAST_LOCATION_LAT + "," + Parameters.FORECAST_LOCATION_LNG);
 		
 		ArrayList<WeatherEvent> weatherEvents = new ArrayList<WeatherEvent>();
 		
@@ -101,6 +98,6 @@ public class WeatherService {
 	 */
 	public static LocalDateTime getSunriseSet(SolarCalculatorResult resultType) {
 		Logger.log(LogLevel.INFO, "Calculating " + resultType.name() + ".");
-		return SolarCalculator.calculate(LOCATION_LAT, LOCATION_LNG, resultType, null);
+		return SolarCalculator.calculate(Parameters.FORECAST_LOCATION_LAT, Parameters.FORECAST_LOCATION_LNG, resultType, null);
 	}
 }

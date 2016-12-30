@@ -6,27 +6,27 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane fx:id="googleEventBox" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.patrikmarin.infoboard.controller.GoogleEventController">
+<GridPane fx:id="calendarEventBox" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.patrikmarin.infoboard.controller.CalendarEventController">
    <styleClass>
-   	  <String fx:value="googleblock" />
+   	  <String fx:value="calendarblock" />
    </styleClass>
    <children>
-      <Label fx:id="googleEventTimeLabel" text="18:00" GridPane.hgrow="NEVER">
+      <Label fx:id="calendarEventTimeLabel" text="18:00" GridPane.hgrow="NEVER">
          <styleClass>
             <String fx:value="main-color" />
-            <String fx:value="googleblock-time" />
-            <String fx:value="googleblock-main" />
+            <String fx:value="calendarblock-time" />
+            <String fx:value="calendarblock-main" />
          </styleClass>
       </Label>
-      <Label fx:id="googleEventTitleLabel" text="2h - Espoonlahden TN 2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <Label fx:id="calendarEventTitleLabel" text="2h - Espoonlahden TN 2" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <styleClass>
             <String fx:value="secondary-color" />
-            <String fx:value="googleblock-info" />
+            <String fx:value="calendarblock-info" />
          </styleClass>
       </Label>
-      <Label fx:id="googleEventInfoLabel" text="EPS Rock Reenit 20" GridPane.columnIndex="1">
+      <Label fx:id="calendarEventInfoLabel" text="EPS Rock Reenit 20" GridPane.columnIndex="1">
          <styleClass>
-            <String fx:value="googleblock-main" />
+            <String fx:value="calendarblock-main" />
             <String fx:value="main-color" />
          </styleClass>
       </Label>

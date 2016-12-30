@@ -62,20 +62,20 @@
 	
 }
 
-.googleblock {
+.calendarblock {
 	-fx-font-size: 36px;
 	-fx-padding: 0 0 10px 0;
 }
 
-.googleblock-main {
+.calendarblock-main {
 	-fx-font-size: 36px;
 }
 
-.googleblock-info {
+.calendarblock-info {
 	-fx-font-size: 30px;
 }
 
-.googleblock-time {
+.calendarblock-time {
 	-fx-padding: 0 20px 0 0;
 }
 

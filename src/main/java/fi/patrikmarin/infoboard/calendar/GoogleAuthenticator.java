@@ -1,4 +1,4 @@
-package fi.patrikmarin.infoboard.google;
+package fi.patrikmarin.infoboard.calendar;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
@@ -6,7 +6,7 @@ import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.util.store.FileDataStoreFactory;
 
-import fi.patrikmarin.infoboard.Keys;
+import fi.patrikmarin.infoboard.App;
 import fi.patrikmarin.infoboard.utils.LogLevel;
 import fi.patrikmarin.infoboard.utils.Logger;
 
@@ -36,7 +36,7 @@ public class GoogleAuthenticator {
     		// Create Google authentication flow
             GoogleAuthorizationCodeFlow flow =
                     new GoogleAuthorizationCodeFlow.Builder(
-                    		GoogleService.HTTP_TRANSPORT, GoogleService.JSON_FACTORY, Keys.GOOGLE_CLIENT_ID, Keys.GOOGLE_CLIENT_SECRET, GoogleService.SCOPES)
+                    		CommonService.HTTP_TRANSPORT, CommonService.JSON_FACTORY, App.API_KEYS.GOOGLE_CLIENT_ID, App.API_KEYS.GOOGLE_CLIENT_SECRET, CommonService.SCOPES)
     		        .setDataStoreFactory(DATA_STORE_FACTORY)
     		        .setAccessType("offline")
     		        .build();
