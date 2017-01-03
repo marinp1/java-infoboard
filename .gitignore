@@ -3,4 +3,6 @@
 /bin/*
 /bin/
 .classpath
+.idea
+infoboard.iml
 API_KEYS.properties
