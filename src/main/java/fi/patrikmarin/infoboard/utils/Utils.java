@@ -180,12 +180,13 @@ public class Utils {
 	}
 	
 	public static ZonedDateTime timestampToZonedDateTime(String ts) {
+
+		DateTimeFormatter mTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+
+		int finalInd = ts.lastIndexOf(".");
+		String s2 = ts.substring(0, finalInd);
 		
-		String[] timestamp = ts.split("\\.");
-		
-		LocalDateTime dateStamp = LocalDateTime.ofEpochSecond(Long.parseLong(timestamp[0]) / 1000, 0, ZoneOffset.UTC);
-		
-		return dateStamp.atZone(ZoneId.systemDefault());
+		return LocalDate.parse(s2, mTimeFormat).atStartOfDay().atZone(ZoneId.systemDefault());
 	}
 	
 	public static String dateTimeDifference(ZonedDateTime start, ZonedDateTime end) {
