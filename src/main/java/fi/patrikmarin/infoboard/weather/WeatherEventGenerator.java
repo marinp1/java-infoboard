@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.SortedSet;
 import java.util.TimeZone;
 import java.util.TreeSet;
@@ -78,6 +79,7 @@ public class WeatherEventGenerator {
 			
 			LocalDateTime dateTime = LocalDateTime.parse(time, Utils.fmiDateTimeFormat);
 			dateTime = dateTime.plusSeconds(TimeZone.getDefault().getRawOffset() / 1000);
+			dateTime = dateTime.plusSeconds(Calendar.getInstance().getTimeZone().getDSTSavings() / 1000);
 			
 			WeatherEvent weatherEvent = new WeatherEvent(dateTime);
 			
